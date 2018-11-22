@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_22_203827) do
+ActiveRecord::Schema.define(version: 2018_11_22_204311) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 2018_11_22_203827) do
   end
 
   create_table "scraps", force: :cascade do |t|
-    t.bigint "user_id"
+    t.bigint "user_id", null: false
     t.text "name", default: "", null: false
     t.text "description", default: "", null: false
     t.boolean "nsfw", default: false, null: false
