@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :scrap do
-    user { nil }
+    user factory: :user
     name { "MyText" }
     description { "MyText" }
-    nsfw { "" }
+    nsfw { false }
   end
 end
