@@ -1,0 +1,25 @@
+<nav class="navbar has-shadow is-info" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="/">
+      <p class="title">ArtWorkDraft</p>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-item has-dropdown is-hoverable">
+      <a class="navbar-link">
+        Account
+      </a>
+
+      <div class="navbar-dropdown">
+      <% if current_user %>
+        <%= link_to current_user.name, current_user, class: "navbar-item" %>
+        <%= render "sessions/logout_form" %>
+      <% else %>
+        <div class="navbar-item">
+          <%= render "sessions/form" %>
+        </div>
+      <% end %>
+      </div>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,13 @@
+<%= form_tag sessions_path, class: "form", method: "post" do -%>
+  <div class="field">
+    <%= label :login, :email, class: "label" %>
+    <%= email_field :login, :email, class: "input" %>
+  </div>
+
+  <div class="field">
+    <%= label :login, :password, class: "label" %>
+    <%= password_field :login, :password, class: "input" %>
+  </div>
+
+  <%= submit_tag "Login", class: "button" %>
+<% end -%>
