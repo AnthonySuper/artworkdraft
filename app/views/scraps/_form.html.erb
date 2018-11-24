@@ -1,0 +1,30 @@
+<%= form_for @scrap, class: "form" do |f| %>
+  <div class="field">
+    <div class="file">
+      <%= f.label :image, class: "file-label" do %>
+        <%= f.file_field :image, class: "file-input" %>
+        <span class="file-cta">
+          <span class="file-icon">
+            <i class="fas fa-upload"></i>
+          </span>
+          <span class="file-label">
+            Choose a file…
+          </span>
+        </span>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= f.label :name, "Name (Optional)" %>
+    <%= f.text_field :name, class: "input" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :descrption, "Description (Optional)" %>
+    <%= f.text_field :description, class: "input" %>
+  </div>
+
+  <%= f.submit class: "button" %>
+
+<% end %>

@@ -1,0 +1,22 @@
+<div class="section">
+  <div class="card">
+    <div class="card-image">
+      <%= image_tag @scrap.image.variant(resize: "1000x1000>"),
+        class: "image is-centered" %>
+    </div>
+
+    <div class="card-content">
+      <div class="content">
+        <% unless @scrap.name.blank? %>
+          <p class="title"><%= @scrap.name %></p>
+        <% end -%>
+        <% unless @scrap.description.blank? %>
+          <p><%= @scrap.description %></p>
+        <% end -%>
+
+        <%= time_tag @scrap.created_at %>
+      </div>
+
+    </div>
+  </div>
+</div>
