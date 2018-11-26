@@ -8,6 +8,7 @@ pool:
 
 variables:
   prodImageName: 'artworkdraft-web:$(build.buildId)'
+  prodImageTag: '$(dockerId).azurecr.io/$(prodImageName)'
 
 steps:
 - script: |
@@ -40,6 +41,6 @@ steps:
     docker login -u $(dockerId) -p $(dockerPswd) $(dockerId).azurecr.io
   displayName: "Docker Login"
 - script: |
-    docker build -f Dockerfile --target awdproduction -t $(prodImageName) .
-    docker push $(dockerId).azurecr.io/$(prodImageName)
+    docker build -f Dockerfile --target awdproduction -t $(prodImageTag) .
+    docker push $(prodImageTag)
   displayName: "Push & Push Production Image"
