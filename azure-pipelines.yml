@@ -37,11 +37,9 @@ steps:
     RAILS_ENV=test bundle exec rspec
   displayName: "Run Rspec"
 - script: |
-    docker build -f Dockerfile --target awdproduction -t $(dockerId)/$(prodImageName) .
-  displayName: "Build Production Docker"
-- script: |
     docker login -u $(dockerId) -p $(dockerPswd) $(dockerId).azurecr.io
   displayName: "Docker Login"
 - script: |
+    docker build -f Dockerfile --target awdproduction -t $(prodImageName) .
     docker push $(dockerId).azurecr.io/$(prodImageName)
-  displayName: "Push Production Image"
+  displayName: "Push & Push Production Image"
