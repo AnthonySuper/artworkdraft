@@ -1,27 +1,28 @@
 require 'rails_helper'
 
 RSpec.describe ScrapPolicy do
-  let(:user) { User.new }
+  let(:scrap) { create(:scrap) }
 
-  subject { described_class }
+  subject { described_class.new(user, scrap) }
 
-  permissions ".scope" do
-    pending "add some examples to (or delete) #{__FILE__}"
+  context "with no user" do
+    let(:user) { nil }
+
+    it { is_expected.to permit_actions(%i[show index]) }
+    it { is_expected.to forbid_actions(%i[new create edit update destroy]) }
   end
 
-  permissions :show? do
-    pending "add some examples to (or delete) #{__FILE__}"
+  context "with a user" do
+    let(:user) { create(:user) }
+
+    it { is_expected.to permit_actions(%i[show index new create]) }
+    it { is_expected.to forbid_actions(%i[edit update destroy]) }
   end
 
-  permissions :create? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
+  context "with the creator" do
+    let(:user) { scrap.user }
 
-  permissions :update? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
-
-  permissions :destroy? do
-    pending "add some examples to (or delete) #{__FILE__}"
+    it { is_expected.to permit_actions(
+      %i[show index new create edit update destroy]) }
   end
 end

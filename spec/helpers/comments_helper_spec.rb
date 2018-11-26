@@ -11,5 +11,10 @@ require 'rails_helper'
 #   end
 # end
 RSpec.describe CommentsHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "new_comment_path" do
+    it "works with a scrap" do
+      scrap = create(:scrap)
+      expect(helper.new_comment_path(scrap)).to eq(scrap_comments_path(scrap))
+    end
+  end
 end
