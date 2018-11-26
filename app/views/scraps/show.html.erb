@@ -7,9 +7,15 @@
 
     <div class="card-content">
       <div class="content">
-        <% unless @scrap.name.blank? %>
+        <% if @scrap.name.blank? %>
+          <p class="title grey">Untitled</p>
+        <% else %>
           <p class="title"><%= @scrap.name %></p>
         <% end -%>
+        <p class="subtitle">
+          By <%= link_to @scrap.user.name, @scrap.user %>
+        </p>
+
         <% unless @scrap.description.blank? %>
           <p><%= @scrap.description %></p>
         <% end -%>

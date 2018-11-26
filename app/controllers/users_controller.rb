@@ -1,5 +1,10 @@
 class UsersController < ApplicationController
 
+  def show
+    @user = policy_scope(User).find(params[:id])
+    authorize @user
+  end
+
   def new
     @user = User.new
   end

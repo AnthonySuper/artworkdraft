@@ -1,0 +1,18 @@
+<section class="section">
+  <div class="container">
+    <h1 class="title"><%= @user.name %></h1>
+    <div class="text">
+      <%= @user.bio %>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h1 class="title">Scraps</h1>
+    <div>
+      <%= render policy_scope(@user.scraps) %>
+    </div>
+  </div>
+</section>
+

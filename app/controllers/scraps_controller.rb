@@ -1,4 +1,9 @@
 class ScrapsController < ApplicationController
+
+
+  def index
+    @scraps = policy_scope(Scrap)
+  end
   
   def new
     @scrap = Scrap.new

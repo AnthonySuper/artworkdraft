@@ -1,24 +1,21 @@
-<nav class="navbar has-shadow is-info" role="navigation" aria-label="main navigation">
+<nav class="navbar has-shadow" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <a class="navbar-item" href="/">
       <p class="title">ArtWorkDraft</p>
     </a>
   </div>
   <div class="navbar-menu">
-    <div class="navbar-item has-dropdown is-hoverable">
-      <a class="navbar-link">
-        Account
-      </a>
-
-      <div class="navbar-dropdown">
-      <% if current_user %>
-        <%= link_to current_user.name, current_user, class: "navbar-item" %>
-        <%= render "sessions/logout_form" %>
-      <% else %>
-        <div class="navbar-item">
-          <%= render "sessions/form" %>
-        </div>
-      <% end %>
+    <div class="navbar-end">
+        <% if current_user %>
+          <%= link_to current_user.name, current_user, class: "navbar-item" %>
+          <div class="navbar-item">
+            <%= render "sessions/logout_form" %>
+          </div>
+        <% else %>
+          <a class="navbar-item" href="/sessions/new">
+            Login
+          </a>
+        <% end %>
       </div>
     </div>
   </div>
