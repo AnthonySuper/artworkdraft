@@ -7,7 +7,7 @@ pool:
   vmImage: 'Ubuntu 16.04'
 
 variables:
-  imageName: 'artworkdraft-web:$(build.buildId)'
+  prodImageName: 'artworkdraft-web:$(build.buildId)'
 
 steps:
 - script: |
@@ -36,5 +36,12 @@ steps:
     RAILS_ENV=test rails db:migrate
     RAILS_ENV=test bundle exec rspec
   displayName: "Run Rspec"
-- script: docker build -f Dockerfile -t $(imageName) .
-  displayName: 'docker build'
+- script: |
+    docker build -f Dockerfile --target awdproduction -t $(dockerId)/$(prodImageName) .
+  displayName: "Build Production Docker"
+- script: |
+    docker login -u $(dockerId) -p $(dockerPswd) $(dockerId).azurecr.io
+  displayName: "Docker Login"
+- script: |
+    docker push $(dockerId).azurecr.io/$(prodImageName)
+  displayName: "Push Production Image"
