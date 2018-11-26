@@ -7,4 +7,15 @@ class Scrap < ApplicationRecord
     class_name: "ScrapComment"
 
   validates :user, presence: true
+
+  def self.with_nsfw nsfw
+    case nsfw
+    when "required"
+      where(nsfw: true)
+    when "allowed", true
+      all
+    else
+      where(nsfw: false)
+    end
+  end
 end

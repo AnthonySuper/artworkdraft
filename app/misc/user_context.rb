@@ -7,7 +7,7 @@ class UserContext
 
 
   def prefs
-    user_prefs.merge(prefs)
+    user_prefs.merge(@prefs)
   end
 
   def user_prefs
