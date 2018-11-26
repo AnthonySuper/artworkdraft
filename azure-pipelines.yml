@@ -30,6 +30,7 @@ steps:
     bundle install
   displayName: "Install gems"
 - script: |
+    sudo -u postgres createuser $USER
     source ~/.rvm/scripts/rvm
     RAILS_ENV=test rails db:setup
     RAILS_ENV=test rails db:migrate
