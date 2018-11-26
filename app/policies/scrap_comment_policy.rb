@@ -5,6 +5,14 @@ class ScrapCommentPolicy < ApplicationPolicy
     end
   end
 
+  def show?
+    true
+  end
+
+  def index?
+    true
+  end
+
   def create?
     logged_in?
   end
