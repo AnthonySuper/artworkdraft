@@ -1,9 +1,10 @@
 <div class="section">
   <div class="card">
-    <div class="card-image">
+    <%= link_to url_for(@scrap.image),
+      class: "card-image centered-image-container" do %>
       <%= image_tag @scrap.image.variant(resize: "1000x1000>"),
         class: "image is-centered" %>
-    </div>
+    <% end %>
 
     <div class="card-content">
       <div class="content">
@@ -26,3 +27,6 @@
     </div>
   </div>
 </div>
+
+<%= render partial: "comments/comment_section",
+  locals: { comments: @scrap.comments, commentable: @scrap } %>

@@ -1,0 +1,21 @@
+<article class="media">
+  <figure class="media-left">
+    <p class="image is-128x128">
+      <%= image_tag comment.user.avatar_img %>
+    </p>
+  </figure>
+  <div class="media-content">
+      <div class="content">
+      <p>
+        <%= link_to comment.user do %>
+          <%= comment.user.name %>
+        <% end %>
+      </p>
+      <p>
+        <%= comment.body %>
+      </p>
+      <br />
+      <small><%= time_tag comment.created_at %></small>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,14 @@
+<article class="section">
+
+  <%= render partial: "comments/comment",
+    collection: comments.order(created_at: :desc).includes(user: {avatar_attachment: :blob}).to_a,
+    as: :comment,
+    cached: true %>
+
+  <% if current_user %>
+    <%= render partial: "comments/comment_form",
+        locals: { commentable: commentable } %>
+  <% end %>
+
+</article>
+

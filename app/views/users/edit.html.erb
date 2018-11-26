@@ -1,0 +1,30 @@
+<div class="section">
+  <%= form_for @user, class: "form" do |f| %>
+    <div class="field">
+      <%= f.label :bio, class: "label" %>
+      <div class="control">
+        <%= f.text_area :bio, class: "textarea" %>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="file">
+        <%= f.label :avatar, class: "file-label" do %>
+          <%= f.file_field :avatar, class: "file-input" %>
+          <span class="file-cta">
+            <span class="file-icon">
+              <i class="material-icons">upload</i>
+            </span>
+            <span class="file-label">
+              Avatar
+            </span>
+          </span>
+        <% end -%>
+      </div>
+    </div>
+
+    <div class="field">
+      <%= f.submit class: "button" %>
+    </div>
+  <% end %>
+</div>

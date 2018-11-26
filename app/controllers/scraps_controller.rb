@@ -3,6 +3,7 @@ class ScrapsController < ApplicationController
 
   def index
     @scraps = policy_scope(Scrap)
+      .includes(image_attachment: :blob)
   end
   
   def new

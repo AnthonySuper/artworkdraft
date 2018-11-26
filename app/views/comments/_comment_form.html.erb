@@ -1,0 +1,21 @@
+<article class="media">
+  <figure class="media-left">
+    <p class="image is-128x128">
+      <%= image_tag current_user.avatar_img %>
+    </p>
+  </figure>
+  <%= form_for :comment,
+    url: new_comment_path(commentable),
+    html: {class: "media-content form"} do |f| %>
+    <div class="field">
+      <div class="control">
+        <%= f.text_area :body, class: "textarea", placeholder: "Add a comment..." %>
+      </div>
+    </div>
+    <div class="field">
+      <div class="control">
+        <%= f.submit class: "button" %>
+      </div>
+    </div>
+  <% end %>
+</article>

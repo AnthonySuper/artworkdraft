@@ -1,8 +1,23 @@
 <section class="section">
   <div class="container">
-    <h1 class="title"><%= @user.name %></h1>
-    <div class="text">
-      <%= @user.bio %>
+    <div class="columns">
+      <div class="column is-one-fifth">
+        <%= image_tag @user.avatar.variant(resize: "250x250>") %>
+      </div>
+      <div class="column">
+        <h1 class="title">
+          <%= @user.name %>
+          <span> </span>
+          <% if @user == current_user %>
+            <%= link_to edit_user_path(@user), class: "material-icons" do %>
+              <i class="material-icons">edit</i>
+            <% end -%>
+          <% end -%>
+        </h1>
+        <div class="text">
+          <%= @user.bio %>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -10,8 +25,12 @@
 <section class="section">
   <div class="container">
     <h1 class="title">Scraps</h1>
-    <div>
-      <%= render policy_scope(@user.scraps) %>
+    <div class="columns is-multiline">
+      <%= render partial: "scraps/column_scrap", 
+        collection: policy_scope(@user.scraps),
+        as: :scrap,
+        cache: true
+      %>
     </div>
   </div>
 </section>

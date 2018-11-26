@@ -10,6 +10,12 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :scraps
+  concern :commentable do |options|
+    resources :comments, options
+  end
+
+  resources :scraps do
+    concerns :commentable, commentable_type: "Scrap"
+  end
 
 end
