@@ -23,11 +23,13 @@ steps:
     wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
     sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -sc)-pgdg main" > /etc/apt/sources.list.d/PostgreSQL.list'
   displayName: "install postgres"
-- script: gem install bundler
-  displayName: "Install bundler"
-- script: bundle install
+- script: |
+    source ~/.rvm/scripts/rvm
+    gem install bundler
+    bundle install
   displayName: "Install gems"
 - script: |
+    source ~/.rvm/scripts/rvm
     RAILS_ENV=test rails db:setup
     RAILS_ENV=test rails db:migrate
     RAILS_ENV=test bundle exec rspec
