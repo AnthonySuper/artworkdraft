@@ -17,7 +17,7 @@ steps:
     source ~/.rvm/scripts/rvm
     rvm install 2.5.3
     rvm use 2.5.3 --default
-  diplayName: "Install Ruby 2.5.3"
+  displayName: "Install Ruby 2.5.3"
 - script: apt-get install -y libpq-dev postgresql-10 build-essential
   displayName: "install postgres"
 - script: gem install bundler
