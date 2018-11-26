@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe UserPolicy do
   let(:duser) { create(:user) }
 
-  subject { described_class.new(user, duser) }
+  subject { described_class.new(UserContext.new(user, {}), duser) }
 
   context "being a visitor" do
     let(:user) { nil }

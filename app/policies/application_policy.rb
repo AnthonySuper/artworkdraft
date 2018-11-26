@@ -35,7 +35,7 @@ class ApplicationPolicy
   end
 
   def logged_in?
-    ! @user.nil?
+    ! @user.user.nil?
   end
 
   class Scope

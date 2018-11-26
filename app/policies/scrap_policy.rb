@@ -27,6 +27,6 @@ class ScrapPolicy < ApplicationPolicy
 
   protected
   def owned?
-    @record.user == @user
+    @record.user == @user.user
   end
 end

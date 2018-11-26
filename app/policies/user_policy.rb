@@ -24,6 +24,6 @@ class UserPolicy < ApplicationPolicy
   protected
 
   def same_user?
-    @user == @record
+    @user.user == @record
   end
 end

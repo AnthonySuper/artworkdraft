@@ -17,13 +17,25 @@
 
   <div class="field">
     <%= f.label :name, "Name (Optional)" %>
-    <%= f.text_field :name, class: "input" %>
+    <div class="control">
+      <%= f.text_field :name, class: "input" %>
+    </div>
   </div>
 
   <div class="field">
     <%= f.label :descrption, "Description (Optional)" %>
-    <%= f.text_field :description, class: "input" %>
+    <div class="control">
+      <%= f.text_area :description, class: "textarea" %>
+    </div>
   </div>
+
+  <div class="field">
+    <%= f.label :nsfw do %>
+      <%= f.check_box :nsfw %>
+      NSFW?
+    <% end %>
+  </div>
+
 
   <%= f.submit class: "button" %>
 
