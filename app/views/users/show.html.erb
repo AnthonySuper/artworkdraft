@@ -2,7 +2,7 @@
   <div class="container">
     <div class="columns">
       <div class="column is-one-fifth">
-        <%= image_tag @user.avatar.variant(resize: "250x250>") %>
+        <%= image_tag @user.avatar&.variant(resize: "250x250>") %>
       </div>
       <div class="column">
         <h1 class="title">
