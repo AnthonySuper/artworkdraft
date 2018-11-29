@@ -6,4 +6,9 @@ RSpec.describe Scrap, type: :model do
     it { is_expected.to allow_value("").for(:description) }
     it { is_expected.to validate_presence_of(:user) }
   end
+
+  describe "relations" do
+    it { is_expected.to have_many(:comments) }
+    it { is_expected.to belong_to(:user) }
+  end
 end

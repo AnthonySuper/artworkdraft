@@ -5,6 +5,8 @@ class User < ApplicationRecord
 
   has_many :scrap_comments
 
+  has_many :artworks
+
 
   has_one_attached :avatar
 

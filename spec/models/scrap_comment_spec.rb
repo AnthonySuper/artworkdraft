@@ -5,4 +5,9 @@ RSpec.describe ScrapComment, type: :model do
     it { is_expected.to validate_presence_of(:user) }
     it { is_expected.to validate_presence_of(:scrap) }
   end
+
+  describe "relations" do
+    it { is_expected.to belong_to(:user) }
+    it { is_expected.to belong_to(:scrap) }
+  end
 end
