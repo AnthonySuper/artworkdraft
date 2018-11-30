@@ -12,7 +12,7 @@
         <% end %>
       </p>
       <p>
-        <%= comment.body %>
+        <%= render_markdown comment.body %>
       </p>
       <br />
       <small><%= time_tag comment.created_at %></small>

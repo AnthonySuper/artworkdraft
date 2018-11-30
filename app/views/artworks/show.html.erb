@@ -19,7 +19,7 @@
             </p>
             <br>
             <p>
-              <%= @artwork.description %>
+              <%= render_markdown @artwork.description %>
             </p>
           </div>
         </div>
@@ -27,3 +27,6 @@
     </div>
   </div>
 </div>
+
+<%= render partial: "comments/comment_section",
+  locals: { comments: @artwork.comments, commentable: @artwork } %>

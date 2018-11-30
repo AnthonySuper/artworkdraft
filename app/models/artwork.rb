@@ -6,7 +6,7 @@ class Artwork < ApplicationRecord
   # RELATIONS
   belongs_to :user
 
-
+  has_many :comments, class_name: "ArtworkComment"
   # ATTACHMENTS
   has_one_attached :image
 

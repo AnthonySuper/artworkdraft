@@ -18,7 +18,7 @@
         </p>
 
         <% unless @scrap.description.blank? %>
-          <p><%= @scrap.description %></p>
+          <p><%= render_markdown @scrap.description %></p>
         <% end -%>
 
         <%= time_tag @scrap.created_at %>

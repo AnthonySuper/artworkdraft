@@ -18,7 +18,9 @@ Rails.application.routes.draw do
     concerns :commentable, commentable_type: "Scrap"
   end
 
-  resources :artworks
+  resources :artworks do
+    concerns :commentable, commentable_type: "Artwork"
+  end
 
 
   root to: "home#index"
