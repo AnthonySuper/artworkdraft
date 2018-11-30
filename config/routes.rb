@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     concerns :commentable, commentable_type: "Artwork"
   end
 
+  resources :tags
 
   root to: "home#index"
 
