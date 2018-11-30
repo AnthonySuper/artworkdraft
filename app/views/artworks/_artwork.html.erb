@@ -1,0 +1,24 @@
+<div class="column">
+  <div class="card">
+    <%= link_to artwork, class: "card-image centered-image-container" do -%>
+      <%= image_tag artwork.image.variant(resize: "500x500>") %>
+    <% end -%>
+    <div class="card-content">
+      <article class="media">
+        <figure class="media-left">
+          <%= link_to artwork.user, class: "image is-64x64" do %>
+            <%= image_tag artwork.user.small_avatar_img %>
+          <% end %>
+        </figure>
+        <div class="media-content">
+          <div class="content">
+            <p class="title"><%= artwork.name %></p>
+            <p class="subtitle">
+              By <%= link_to artwork.user.name, artwork.user %>
+            </p>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</div>

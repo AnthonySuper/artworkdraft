@@ -5,7 +5,7 @@ class ScrapsController < ApplicationController
     @scraps = policy_scope(Scrap)
       .includes(image_attachment: :blob)
   end
-  
+
   def new
     @scrap = Scrap.new
     authorize @scrap

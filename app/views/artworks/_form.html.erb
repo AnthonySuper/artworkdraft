@@ -1,0 +1,42 @@
+<%= form_for artwork, class: "form" do |f| -%>
+  <div class="field">
+    <div class="file">
+      <%= f.label :image, class: "file-label" do %>
+        <%= f.file_field :image, class: "file-input" %>
+        <span class="file-cta">
+          <span class="file-icon">
+            <i class="fas fa-upload"></i>
+          </span>
+          <span class="file-label">
+            Choose a file…
+          </span>
+        </span>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= f.label :name, class: "label" %>
+    <div class="control">
+      <%= f.text_field :name, class: "input", required: true %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= f.label :description, class: "label" %>
+    <div class="control">
+      <%= f.text_area :description, class: "textarea", required: false %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= f.label :nsfw do %>
+      <%= f.check_box :nsfw %>
+    NSFW?
+    <% end %>
+  </div>
+
+  <div class="control">
+    <%= f.submit class: "button" %>
+  </div>
+<% end %>

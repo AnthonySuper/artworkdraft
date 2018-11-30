@@ -1,5 +1,8 @@
 class Artwork < ApplicationRecord
 
+  # CONCERNS
+  include Worksafe
+
   # RELATIONS
   belongs_to :user
 
