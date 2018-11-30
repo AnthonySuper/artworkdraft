@@ -1,24 +1,41 @@
-# README
+# ArtWorkDraft
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+It's an art website!
 
-Things you may want to cover:
 
-* Ruby version
+## Contributing
 
-* System dependencies
+We welcome code contributions.
+We also welcome [issues](https://github.com/AnthonySuper/artworkdraft/issues).
+Feel free to make a feature request, a bug report, or anything else.
 
-* Configuration
+## Setting Up
 
-* Database creation
+This is a bog-standard rails environment.
+Essentially, you need to install:
 
-* Database initialization
 
-* How to run the test suite
+1. Ruby 2.5.3 (RVM is one way to do this)
+2. PotsgreSQL
+3. Bundler
+4. Node.js
+5. Yarn
 
-* Services (job queues, cache servers, search engines, etc.)
+That's it!
 
-* Deployment instructions
 
-* ...
+### Prepare the Environment
+
+Your database needs to allow local connections.
+From there, run the following commands
+
+```bash
+bundle
+yarn
+rails db:setup
+rails s
+```
+
+You now have a working development environment.
+
+
