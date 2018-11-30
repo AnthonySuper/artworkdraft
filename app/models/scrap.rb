@@ -17,4 +17,11 @@ class Scrap < ApplicationRecord
   # VALIDATIONS
   validates :user, presence: true
 
+
+  # METHODS
+  def thumbnail_path
+    return image.variant(resize: "500x500>") if image.attachment
+    "default_square.png"
+  end
+
 end
