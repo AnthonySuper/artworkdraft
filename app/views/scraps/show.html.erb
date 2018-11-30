@@ -2,8 +2,7 @@
   <div class="card">
     <%= link_to url_for(@scrap.image),
       class: "card-image centered-image-container" do %>
-      <%= image_tag @scrap.image.variant(resize: "1000x1000>"),
-        class: "image is-centered" %>
+      <%= image_tag @scrap.image.variant(resize: "1000x1000>") %>
     <% end %>
 
     <div class="card-content">
