@@ -10,6 +10,8 @@ class Scrap < ApplicationRecord
   has_many :comments,
     class_name: "ScrapComment"
 
+  has_many :scrap_tags
+  has_many :tags, through: :scrap_tags
 
   # ATTACHMENTS 
   has_one_attached :image

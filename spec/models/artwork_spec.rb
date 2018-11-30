@@ -10,5 +10,7 @@ RSpec.describe Artwork, type: :model do
   describe "relationships" do
     it { is_expected.to belong_to(:user) }
     it { is_expected.to have_many(:comments) }
+    it { is_expected.to have_many(:artwork_tags) }
+    it { is_expected.to have_many(:tags) }
   end
 end

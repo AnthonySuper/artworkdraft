@@ -8,5 +8,7 @@ RSpec.describe Tag, type: :model do
   describe "relations" do
     it { is_expected.to have_many(:artwork_tags) }
     it { is_expected.to have_many(:artworks) }
+    it { is_expected.to have_many(:scrap_tags) }
+    it { is_expected.to have_many(:scraps) }
   end
 end

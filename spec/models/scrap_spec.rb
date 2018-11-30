@@ -10,5 +10,7 @@ RSpec.describe Scrap, type: :model do
   describe "relations" do
     it { is_expected.to have_many(:comments) }
     it { is_expected.to belong_to(:user) }
+    it { is_expected.to have_many(:scrap_tags) }
+    it { is_expected.to have_many(:tags) }
   end
 end

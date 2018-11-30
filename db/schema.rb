@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_30_211816) do
+ActiveRecord::Schema.define(version: 2018_11_30_212346) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -75,6 +75,15 @@ ActiveRecord::Schema.define(version: 2018_11_30_211816) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "scrap_tags", force: :cascade do |t|
+    t.bigint "scrap_id", null: false
+    t.uuid "tag_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["scrap_id"], name: "index_scrap_tags_on_scrap_id"
+    t.index ["tag_id"], name: "index_scrap_tags_on_tag_id"
+  end
+
   create_table "scraps", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.text "name", default: "", null: false
@@ -111,5 +120,7 @@ ActiveRecord::Schema.define(version: 2018_11_30_211816) do
   add_foreign_key "artworks", "users"
   add_foreign_key "scrap_comments", "scraps", on_delete: :cascade
   add_foreign_key "scrap_comments", "users", on_delete: :cascade
+  add_foreign_key "scrap_tags", "scraps", on_delete: :cascade
+  add_foreign_key "scrap_tags", "tags", on_delete: :cascade
   add_foreign_key "scraps", "users", on_delete: :cascade
 end
