@@ -11,7 +11,17 @@
     <%= stylesheet_pack_tag 'application' %>
     <%= javascript_pack_tag 'application' %>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-    rel="stylesheet" data-turbolinks-track="reload">
+          rel="stylesheet" data-turbolinks-track="reload">
+    <!-- We use google analytics, but we don't really care if you block it -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-30487635-6"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+gtag('config', 'UA-30487635-6');
+    </script>
+
   </head>
 
   <body>
