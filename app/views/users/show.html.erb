@@ -1,25 +1,32 @@
 <section class="section">
   <div class="container">
     <div class="columns">
-      <div class="column is-one-fifth">
-        <%= image_tag @user.avatar_img %>
-      </div>
       <div class="column">
-        <h1 class="title">
-          <%= @user.name %>
-          <span> </span>
-          <% if @user == current_user %>
-            <%= link_to edit_user_path(@user), class: "material-icons" do %>
-              <i class="material-icons">edit</i>
-            <% end -%>
-          <% end -%>
-        </h1>
-        <div class="text">
-          <%= @user.bio %>
+        <div class="media">
+          <figure class="media-left">
+            <p class="image is-128x128">
+              <%= image_tag @user.avatar_img %>
+            </p>
+          </figure>
+          <div class="media-content">
+            <div class="content">
+              <h1 class="title">
+                <%= @user.name %>
+                <span> </span>
+                <% if @user == current_user %>
+                  <%= link_to edit_user_path(@user), class: "material-icons" do %>
+                    <i class="material-icons">edit</i>
+                  <% end -%>
+                <% end -%>
+              </h1>
+              <div class="text">
+                <%= @user.bio %>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 </section>
 
 <section class="section">
@@ -27,9 +34,9 @@
     <h1 class="title">Artworks</h1>
     <div class="columns is-multiline">
       <%= render partial: "users/artwork",
-      collection: policy_scope(@user.artworks),
-      as: :artwork,
-      cache: true %>
+        collection: policy_scope(@user.artworks),
+        as: :artwork,
+        cache: true %>
     </div>
   </div>
 </section>
