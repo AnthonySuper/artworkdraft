@@ -1,0 +1,19 @@
+<%= form_for tag, class: "form" do |f| %>
+  <div class="field">
+    <%= f.label :name, class: "label" %>
+    <div class="control">
+      <%= f.text_field :name, class: "input", required: true %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= f.label :description, class: "label" %>
+    <div class="control">
+      <%= f.text_area :description, class: "textarea" %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= f.submit class: "button" %>
+  </div>
+<% end -%>
