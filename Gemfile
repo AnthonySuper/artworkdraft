@@ -18,6 +18,9 @@ gem 'uglifier', '>= 1.3.0'
 gem "aws-sdk-s3", require: false
 gem 'webpacker'
 
+# make sprockets happy even though we don't use this
+gem 'coffee-rails'
+
 gem 'bcrypt'
 
 gem 'pundit'
