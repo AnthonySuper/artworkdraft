@@ -1,0 +1,19 @@
+<section class="section">
+  <div class="content">
+    <%= render 'index_tag', tag: @tag %>
+  </div>
+</section>
+
+<section class="section">
+  <div class="content">
+    <h1 class="title">Artworks</h1>
+    <%= render policy_scope(@tag.artworks).order(created_at: :desc).limit(10) %>
+  </div>
+</section>
+
+<section class="section">
+  <div class="content">
+    <h1 class="title">Scraps</h1>
+    <%= render policy_scope(@tag.scraps).order(created_at: :desc).limit(10) %>
+  </div>
+</section>
