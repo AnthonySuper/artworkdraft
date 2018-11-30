@@ -12,7 +12,7 @@ RSpec.describe "Scrap Features", type: :feature do
 
       expect(page).to have_link(href: scrap_path(scrap_1))
       expect(page).to have_link(href: scrap_path(scrap_2))
-      expect(page).to_not have_link(href: scrap_apth(scrap_nsfw))
+      expect(page).to_not have_link(href: scrap_path(scrap_nsfw))
     end
 
     scenario "with a user that allows NSFW" do
