@@ -52,7 +52,7 @@ class UsersController < ApplicationController
   def user_params
     params
       .require(:user)
-      .permit(:bio, :avatar)
+      .permit(:bio, :avatar, prefs: [:nsfw])
   end
 
   def load_user

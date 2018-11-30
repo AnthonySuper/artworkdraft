@@ -23,6 +23,19 @@
       </div>
     </div>
 
+    <%= f.fields_for :prefs do |f| %>
+      <div class="field">
+        <%= f.label :nsfw, class: "label" %>
+        <div class="select">
+          <%= f.select :nsfw,
+            [["Disabled", "disabled"], 
+             ["Allowed", "allowed"],
+             ["Required", "required"]],
+          selected: @user.prefs["nsfw"] %>
+        </div>
+      </div>
+    <% end %>
+
     <div class="field">
       <%= f.submit class: "button" %>
     </div>

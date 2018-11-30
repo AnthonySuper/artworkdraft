@@ -1,9 +1,9 @@
 
 <div class="card">
   <header class="card-header">
-    <p class="card-header-title">
+    <%= link_to user, class: "card-header-title" do -%>
       <%= user.name %>
-    </p>
+    <% end -%>
   </header>
 
   <div class="card-content">
