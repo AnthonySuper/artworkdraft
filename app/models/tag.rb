@@ -1,5 +1,6 @@
 class Tag < ApplicationRecord
 
+  include Worksafe
 
   # RELATIONS
   has_many :artwork_tags
