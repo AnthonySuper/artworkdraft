@@ -29,8 +29,6 @@ class TagsController < ApplicationController
     end
   end
 
-
-
   def tag_params
     params.require(:tag).permit(:name, :description, :nsfw)
   end
