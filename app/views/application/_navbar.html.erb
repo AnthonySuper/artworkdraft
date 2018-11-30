@@ -3,8 +3,14 @@
     <a class="navbar-item" href="/">
       <p class="title">ArtWorkDraft</p>
     </a>
+    <a role="button" data-target="navMenu"
+      class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
   </div>
-  <div class="navbar-menu">
+  <div class="navbar-menu" id="navMenu">
     <div class="navbar-start">
       <% if current_user %>
         <div class="navbar-item has-dropdown is-hoverable">
