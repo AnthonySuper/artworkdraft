@@ -10,19 +10,25 @@ RSpec.describe "Scrap Features", type: :feature do
     scenario "with no user and no pref" do
       visit scraps_path
 
-      expect(page).to have_selector("a.centered-image-container", count: 2)
+      expect(page).to have_link(href: scrap_path(scrap_1))
+      expect(page).to have_link(href: scrap_path(scrap_2))
+      expect(page).to_not have_link(href: scrap_apth(scrap_nsfw))
     end
 
     scenario "with a user that allows NSFW" do
       visit scraps_path(prefs: {nsfw: "allowed"})
 
-      expect(page).to have_selector("a.centered-image-container", count: 3)
+      expect(page).to have_link(href: scrap_path(scrap_1))
+      expect(page).to have_link(href: scrap_path(scrap_2))
+      expect(page).to have_link(href: scrap_path(scrap_nsfw))
     end
 
     scenario "with a user that requires NSFW" do
       visit scraps_path(prefs: {nsfw: "required"})
-      
-      expect(page).to have_selector("a.centered-image-container", count: 1)
+      expect(page).to_not have_link(href: scrap_path(scrap_1))
+      expect(page).to_not have_link(href: scrap_path(scrap_2))
+      expect(page).to have_link(href: scrap_path(scrap_nsfw))
+
     end
   end
 end
