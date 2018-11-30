@@ -7,6 +7,9 @@ addons:
     packages:
     - postgresql-10
     - postgresql-client-10
+env:
+  global:
+  - PGPORT=5433
 before_script:
   - cp config/database.yml.travis config/database.yml
   - psql -c 'create database travis_ci_test;' -U postgres
