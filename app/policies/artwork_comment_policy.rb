@@ -9,6 +9,10 @@ class ArtworkCommentPolicy < ApplicationPolicy
     logged_in?
   end
 
+  def index?
+    true
+  end
+
   def show?
     true
   end

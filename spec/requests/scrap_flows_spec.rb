@@ -8,7 +8,7 @@ RSpec.describe "ScrapFlows", type: :request do
     before(:each) { [scrap_1, scrap_2, scrap_nsfw] }
 
    it "is success" do
-      visit scraps_path
+      get scraps_path
       expect(response).to have_http_status(200)
     end
   end

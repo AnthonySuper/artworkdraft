@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :artwork_comment do
-    user { nil }
+    user factory: :user
     body { "MyText" }
-    artwork { nil }
+    artwork factory: :artwork
   end
 end

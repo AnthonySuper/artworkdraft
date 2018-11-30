@@ -1,27 +1,19 @@
 require 'rails_helper'
 
 RSpec.describe ArtworkCommentPolicy do
-  let(:user) { User.new }
+  let(:artwork_comment) { create(:artwork_comment) }
 
-  subject { described_class }
+  subject { described_class.new(UserContext.new(user,{}), artwork_comment) }
 
-  permissions ".scope" do
-    pending "add some examples to (or delete) #{__FILE__}"
+  context "being a visitor" do
+    let(:user) { nil }
+    it { is_expected.to permit_actions(%i[index show]) }
+    it { is_expected.to forbid_actions(%i[new create edit update destroy]) }
   end
 
-  permissions :show? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
-
-  permissions :create? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
-
-  permissions :update? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
-
-  permissions :destroy? do
-    pending "add some examples to (or delete) #{__FILE__}"
+  context "being a user" do
+    let(:user) { create(:user) }
+    it { is_expected.to permit_actions(%i[index show new create]) }
+    it { is_expected.to forbid_actions(%i[edit update destroy]) }
   end
 end
