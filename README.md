@@ -38,4 +38,13 @@ rails s
 
 You now have a working development environment.
 
+## Deploying
+
+This repo uses continuous deployment.
+The `master` branch lives *on production* at all times.
+As a result, all development *must* be done on the `development` branch!
+
+Branches will not be merged to master until they are in some way "complete."
+Ideally, this includes extensive tests of any new functionality.
+Keep this in mind when contributing.
 
