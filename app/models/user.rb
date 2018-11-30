@@ -16,6 +16,12 @@ class User < ApplicationRecord
 
 
   def avatar_img
-    avatar.variant(resize: "128x128>")
+    return avatar.variant(resize: "128x128>") if avatar.attachment
+    "default_square.png"
+  end
+
+  def small_avatar_img
+    return avatar&.variant(resize: "64x64>") if avatar.attachment
+    "default_square.png"
   end
 end

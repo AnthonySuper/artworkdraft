@@ -18,4 +18,6 @@ Rails.application.routes.draw do
     concerns :commentable, commentable_type: "Scrap"
   end
 
+  resources :artworks
+
 end

@@ -2,7 +2,7 @@
   <div class="container">
     <div class="columns">
       <div class="column is-one-fifth">
-        <%= image_tag @user.avatar&.variant(resize: "250x250>") %>
+        <%= image_tag @user.avatar_img %>
       </div>
       <div class="column">
         <h1 class="title">
@@ -21,6 +21,19 @@
     </div>
   </div>
 </section>
+
+<section class="section">
+  <div class="container">
+    <h1 class="title">Artworks</h1>
+    <div class="columns is-multiline">
+      <%= render partial: "users/artwork",
+      collection: policy_scope(@user.artworks),
+      as: :artwork,
+      cache: true %>
+    </div>
+  </div>
+</section>
+
 
 <section class="section">
   <div class="container">
