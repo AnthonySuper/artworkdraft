@@ -4,4 +4,9 @@ RSpec.describe Tag, type: :model do
   describe "validations" do
     it { is_expected.to validate_presence_of(:name) }
   end
+
+  describe "relations" do
+    it { is_expected.to have_many(:artwork_tags) }
+    it { is_expected.to have_many(:artworks) }
+  end
 end

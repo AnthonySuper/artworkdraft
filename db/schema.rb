@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_30_211320) do
+ActiveRecord::Schema.define(version: 2018_11_30_211816) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -46,6 +46,15 @@ ActiveRecord::Schema.define(version: 2018_11_30_211320) do
     t.datetime "updated_at", null: false
     t.index ["artwork_id"], name: "index_artwork_comments_on_artwork_id"
     t.index ["user_id"], name: "index_artwork_comments_on_user_id"
+  end
+
+  create_table "artwork_tags", force: :cascade do |t|
+    t.bigint "artwork_id", null: false
+    t.uuid "tag_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["artwork_id"], name: "index_artwork_tags_on_artwork_id"
+    t.index ["tag_id"], name: "index_artwork_tags_on_tag_id"
   end
 
   create_table "artworks", force: :cascade do |t|
@@ -97,6 +106,8 @@ ActiveRecord::Schema.define(version: 2018_11_30_211320) do
 
   add_foreign_key "artwork_comments", "artworks", on_delete: :cascade
   add_foreign_key "artwork_comments", "users", on_delete: :cascade
+  add_foreign_key "artwork_tags", "artworks", on_delete: :cascade
+  add_foreign_key "artwork_tags", "tags", on_delete: :cascade
   add_foreign_key "artworks", "users"
   add_foreign_key "scrap_comments", "scraps", on_delete: :cascade
   add_foreign_key "scrap_comments", "users", on_delete: :cascade
