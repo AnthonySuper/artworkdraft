@@ -23,9 +23,11 @@
         <%= time_tag @scrap.created_at %>
       </div>
 
+      <div data-vue-component="tags/tag-form" />
     </div>
   </div>
 </div>
+
 
 <%= render partial: "comments/comment_section",
   locals: { comments: @scrap.comments, commentable: @scrap } %>
