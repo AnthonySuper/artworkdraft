@@ -33,26 +33,43 @@
           :is-active="idx == activeSuggestionIdx"
           v-on:tag-clicked="addTag"/>
       </div>
+      <div v-if="showCreate">
+        <tag-create-box v-on:tag-created="addTag" />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  props: ["tags"],
+  props: {
+    tags: {
+      type: Array,
+      required: true
+    },
+    allowCreate: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+  },
   model: {
     prop: "tags",
     event: "change-tags",
   },
   components: {
-    "removeable-tag": async function() {
+    "removeable-tag": async () => {
       let cmp = await import('./removeable-tag.vue');
       return cmp.default;
     },
-    "tag-suggestion": async function() {
+    "tag-suggestion": async () => {
       let cmp = await import("./tag-suggestion.vue");
       return cmp.default;
-    }
+    },
+    "tag-create-box": async () => {
+      let cmp = await import("./tag-create-box.vue");
+      return cmp.default;
+    },
   },
   data: function() {
     return {
@@ -67,7 +84,13 @@ export default {
       let filtering = this.inputValue.toLowerCase();
       let f = s => s.name.toLowerCase().includes(filtering);
       return this.suggestions.filter(f);
-    }
+    },
+    showCreate() {
+      
+      return this.allowCreate && 
+        this.currentSuggestions.length === 0 &&
+        this.inputValue !== "";
+    },
   },
   methods: {
     addTag: function(tag) {
@@ -75,6 +98,7 @@ export default {
       let tags = [...this.tags, tag];
       this.suggestions = [];
       this.activeSuggestionIdx = 0;
+      this.inputValue = "";
       this.$emit("change-tags", tags);
     },
     addCurrentTag: function() {
