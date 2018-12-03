@@ -2,6 +2,7 @@
   <%= form_tag scraps_path, method: :get, class: "form" do %>
 
     <div class="field">
+      <label for="search[tags]" class="label">Tags</label>
       <div data-vue-component="tags/new-tags-form"
            data-field-name="search[tags]">
       </div>

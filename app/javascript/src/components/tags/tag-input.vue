@@ -1,8 +1,12 @@
 <template>
   <div>
-    <div class="content" v-for="tag in tags" :key="tag.id">
-      <removeable-tag :tagName="tag.name" :tagId="tag.id"
-        v-on:remove-tag="removeTag" />
+    <div class="tags">
+      <template v-for="tag in tags">
+        <removeable-tag :tagName="tag.name" 
+          :tagId="tag.id"
+          :key="tag.id"
+          v-on:remove-tag="removeTag" />
+      </template>
     </div>
     <div class="tag-suggestions-container">
       <div class="field has-addons">
