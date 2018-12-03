@@ -4,6 +4,7 @@ FactoryBot.define do
     description { "MyText" }
     nsfw { false }
     user factory: :user
+    image { FilesTestHelper.png }
 
     trait :nsfw do 
       nsfw { true }

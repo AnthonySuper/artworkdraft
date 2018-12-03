@@ -20,12 +20,16 @@
           <p><%= render_markdown @scrap.description %></p>
         <% end -%>
 
+        <%= render "tags/tag_list",
+          tags: @scrap.tags %>
+
         <%= time_tag @scrap.created_at %>
       </div>
 
     </div>
   </div>
 </div>
+
 
 <%= render partial: "comments/comment_section",
   locals: { comments: @scrap.comments, commentable: @scrap } %>
