@@ -10,6 +10,8 @@
         <input v-model="inputValue" 
                type="text" 
                class="input" 
+               v-on:focus="startFocus"
+               v-on:blur="endFocus"
                v-on:keydown="keydown"
                v-on:input="changeInput" />
         </div>
@@ -19,7 +21,8 @@
           </a>
         </div>
       </div>
-      <div class="suggestions-box" 
+      <div class="suggestions-box"
+           v-bind:class="{active: hasFocus}"
            v-for="(tag, idx) in currentSuggestions"                        
            :key="tag.id">
         <tag-suggestion :tag="tag"
@@ -32,6 +35,11 @@
 
 <script>
 export default {
+  props: ["tags"],
+  model: {
+    prop: "tags",
+    event: "change-tags",
+  },
   components: {
     "removeable-tag": async function() {
       let cmp = await import('./removeable-tag.vue');
@@ -44,10 +52,10 @@ export default {
   },
   data: function() {
     return {
-      tags: [{id: 1, name: "Dragon"}],
       inputValue: "",
       suggestions: [],
       activeSuggestionIdx: 0,
+      hasFocus: false,
     }
   },
   computed: {
@@ -59,9 +67,10 @@ export default {
   },
   methods: {
     addTag: function(tag) {
-      this.tags = [...this.tags, tag];
+      let tags = [...this.tags, tag];
       this.suggestions = [];
       this.activeSuggestionIdx = 0;
+      this.$emit("change-tags", tags);
     },
     addCurrentTag: function() {
       let tag = this.currentSuggestions[this.activeSuggestionIdx];
@@ -97,7 +106,23 @@ export default {
       let s = await s$.json();
       this.suggestions = s;
       this.activeSuggestionIdx = 0;
+    },
+    startFocus: function() {
+      this.hasFocus = true;
+    },
+    endFocus: function() {
+      this.hasFocus = false;
     }
   }
 }
 </script>
+
+<style>
+.suggestions-box {
+  display: none;
+}
+
+.suggestions-box.active {
+  display: block;
+}
+</style>
