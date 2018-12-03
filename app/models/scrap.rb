@@ -19,6 +19,7 @@ class Scrap < ApplicationRecord
   # VALIDATIONS
   validates :user, presence: true
 
+  validates :image, attached: true
 
   # METHODS
   def thumbnail_path

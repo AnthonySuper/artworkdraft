@@ -67,6 +67,7 @@ export default {
   },
   methods: {
     addTag: function(tag) {
+      console.log("Adding tag", tag);
       let tags = [...this.tags, tag];
       this.suggestions = [];
       this.activeSuggestionIdx = 0;
@@ -88,6 +89,7 @@ export default {
       }
       else if(key == "Enter") {
         this.addCurrentTag();
+        evt.preventDefault();
       }
     },
     moveActiveIdx: function(idx) {
@@ -111,7 +113,7 @@ export default {
       this.hasFocus = true;
     },
     endFocus: function() {
-      this.hasFocus = false;
+      window.setTimeout(() => this.hasFocus = false, 300);
     }
   }
 }

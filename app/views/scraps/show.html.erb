@@ -20,10 +20,12 @@
           <p><%= render_markdown @scrap.description %></p>
         <% end -%>
 
+        <%= render "tags/tag_list",
+          tags: @scrap.tags %>
+
         <%= time_tag @scrap.created_at %>
       </div>
 
-      <div data-vue-component="tags/tag-fields" />
     </div>
   </div>
 </div>

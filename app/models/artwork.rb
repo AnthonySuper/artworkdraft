@@ -17,4 +17,5 @@ class Artwork < ApplicationRecord
   # VALIDATIONS
   validates :user, presence: true
   validates :name, presence: true
+  validates :image, attached: true
 end

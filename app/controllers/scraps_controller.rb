@@ -36,7 +36,7 @@ class ScrapsController < ApplicationController
   def scrap_params
     params
       .require(:scrap)
-      .permit(:image, :name, :description, :nsfw)
+      .permit(:image, :name, :description, :nsfw, tag_ids: [])
       .merge(user: current_user)
   end
 end

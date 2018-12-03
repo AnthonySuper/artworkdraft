@@ -3,7 +3,7 @@
     <a :href="tagLink" target="_blank">
       {{tagName}} 
     </a>
-    <button class="delete is-medium" v-on:click="removeTag" />
+    <button type="button" class="delete is-medium" v-on:click="removeTag" />
   </span>
 </template>
 

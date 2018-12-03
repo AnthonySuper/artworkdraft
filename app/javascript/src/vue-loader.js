@@ -9,10 +9,13 @@ document.addEventListener('turbolinks:load', () => {
     let compName = elm.dataset.vueComponent;
     let comp$ = await import(`./components/${compName}.vue`);
     let comp = comp$.default;
-    console.log(`Loaded Vue "${compName}", rendering...`, { comp });
+    let props = Object.assign({}, elm.dataset);
+    console.log(`Loaded Vue "${compName}", rendering...`, { comp, props });
     let v = new Vue({
       el: elm,
-      render: h => h(comp)
+      render: h => h(comp, {
+        props: props
+      }),
     });
   });
 });

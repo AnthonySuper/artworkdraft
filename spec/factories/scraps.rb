@@ -4,5 +4,6 @@ FactoryBot.define do
     name { "MyText" }
     description { "MyText" }
     nsfw { false }
+    image { FilesTestHelper.png }
   end
 end
