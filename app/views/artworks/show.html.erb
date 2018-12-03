@@ -17,10 +17,13 @@
             <p class="subtitle">
               By <%= link_to @artwork.user.name, @artwork.user %>
             </p>
-            <br>
+            <%= render "tags/tag_list",
+              tags: @artwork.tags %>
             <p>
               <%= render_markdown @artwork.description %>
             </p>
+            <hr />
+            <%= time_tag @artwork.created_at %>
           </div>
         </div>
       </article>
