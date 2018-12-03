@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_30_221352) do
+ActiveRecord::Schema.define(version: 2018_12_03_204254) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -95,7 +95,7 @@ ActiveRecord::Schema.define(version: 2018_11_30_221352) do
   end
 
   create_table "tags", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "name", null: false
+    t.citext "name", null: false
     t.text "description", default: "", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

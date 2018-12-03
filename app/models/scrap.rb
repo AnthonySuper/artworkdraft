@@ -2,6 +2,8 @@ class Scrap < ApplicationRecord
 
   # CONCERNS
   include Worksafe
+  include TagSearched
+  include Searched
 
   # RELATIONS 
   belongs_to :user
