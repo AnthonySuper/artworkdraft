@@ -1,4 +1,15 @@
 <div class="section">
+  <%= form_tag scraps_path, method: :get, class: "form" do %>
+
+    <div class="field">
+      <div data-vue-component="tags/new-tags-form"
+           data-field-name="search[tags]">
+      </div>
+    </div>
+    <%= submit_tag "Search", class: "button" %>
+  <% end %>
+</div>
+<div class="section">
   <div class="columns is-multiline">
     <%= render collection: @scraps,
       partial: "column_scrap",

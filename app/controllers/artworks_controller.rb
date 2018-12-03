@@ -5,6 +5,7 @@ class ArtworksController < ApplicationController
       .includes(user: {avatar_attachment: :blob})
       .with_attached_image
       .order(created_at: :desc)
+      .search(params[:search])
     authorize @artworks
   end
 
