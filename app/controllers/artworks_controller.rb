@@ -5,6 +5,7 @@ class ArtworksController < ApplicationController
       .includes(user: {avatar_attachment: :blob})
       .with_attached_image
       .order(created_at: :desc)
+      .search(params[:search])
     authorize @artworks
   end
 
@@ -36,7 +37,8 @@ class ArtworksController < ApplicationController
 
   protected
   def artwork_create_params
-    params.require(:artwork).permit(:image, :name, :description)
+    params.require(:artwork)
+      .permit(:image, :name, :description, :nsfw, tag_ids: [])
       .merge(user: current_user)
   end
 end

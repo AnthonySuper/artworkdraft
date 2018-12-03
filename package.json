@@ -3,9 +3,40 @@
   "private": true,
   "dependencies": {
     "@rails/webpacker": "3.5",
-    "bulma": "^0.7.2"
+    "bulma": "^0.7.2",
+    "vue": "^2.5.17",
+    "vue-loader": "^15.4.2",
+    "vue-template-compiler": "^2.5.17",
+    "vue-turbolinks": "^2.0.3"
   },
   "devDependencies": {
+    "@vue/test-utils": "^1.0.0-beta.26",
+    "babel-jest": "^23.6.0",
+    "babel-plugin-dynamic-import-node": "^2.2.0",
+    "jest": "^23.6.0",
+    "vue-jest": "^3.0.1",
     "webpack-dev-server": "2.11.2"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "vue"
+    ],
+    "roots": [
+      "spec/javascript",
+      "app/javascript"
+    ],
+    "moduleDirectories": [
+      "node_modules",
+      "app/javascript/src"
+    ],
+    "transform": {
+      "^.+\\.js$": "<rootDir>/node_modules/babel-jest",
+      "^.+\\.vue$": "<rootDir>/node_modules/vue-jest"
+    }
+  },
+  "scripts": {
+    "test": "jest"
   }
 }

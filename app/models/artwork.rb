@@ -2,6 +2,8 @@ class Artwork < ApplicationRecord
 
   # CONCERNS
   include Worksafe
+  include TagSearched
+  include Searched
 
   # RELATIONS
   belongs_to :user
@@ -17,4 +19,5 @@ class Artwork < ApplicationRecord
   # VALIDATIONS
   validates :user, presence: true
   validates :name, presence: true
+  validates :image, attached: true
 end

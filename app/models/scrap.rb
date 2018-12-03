@@ -2,6 +2,8 @@ class Scrap < ApplicationRecord
 
   # CONCERNS
   include Worksafe
+  include TagSearched
+  include Searched
 
   # RELATIONS 
   belongs_to :user
@@ -19,6 +21,7 @@ class Scrap < ApplicationRecord
   # VALIDATIONS
   validates :user, presence: true
 
+  validates :image, attached: true
 
   # METHODS
   def thumbnail_path

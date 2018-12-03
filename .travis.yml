@@ -1,4 +1,7 @@
 language: ruby
+cache: 
+  - bundler
+  - yarn
 rvm: 
   - 2.5.3
 addons:
@@ -19,3 +22,4 @@ script:
   - bundle exec rails db:migrate RAILS_ENV=test
   - RAILS_ENV=test bundle exec rails assets:precompile
   - RAILS_ENV=test bundle exec rspec
+  - RAILS_ENV=test yarn test 
