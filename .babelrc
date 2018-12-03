@@ -14,5 +14,10 @@
     "syntax-dynamic-import",
     "transform-object-rest-spread",
     ["transform-class-properties", { "spec": true }]
-  ]
+  ],
+  "env": {
+    "test": {
+      "plugins": ["dynamic-import-node", "transform-es2015-modules-commonjs"]
+    }
+  }
 }
