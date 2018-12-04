@@ -22,7 +22,15 @@ Rails.application.routes.draw do
     concerns :commentable, commentable_type: "Artwork"
   end
 
+  resources :followings, only: [:create, :destroy]
+
   resources :tags
+
+  scope "feeds" do
+    root to: "feeds#index"
+    get "artworks", to: "feeds#artworks"
+    get "scraps", to: "feeds#scraps"
+  end
 
   root to: "home#index"
 

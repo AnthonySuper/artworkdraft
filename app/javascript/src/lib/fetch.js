@@ -16,3 +16,12 @@ export function postJSON(endpoint, json) {
   });
 };
 
+export async function getJSON(endpoint) {
+  let r = await fetch(endpoint, {
+    headers: {
+      "Accept": "application/json",
+      "Content-Type": "application/json",
+    }
+  });
+  return await r.json();
+};
