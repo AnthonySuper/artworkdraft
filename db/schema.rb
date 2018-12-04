@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_03_204254) do
+ActiveRecord::Schema.define(version: 2018_12_04_181725) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -67,6 +67,16 @@ ActiveRecord::Schema.define(version: 2018_12_03_204254) do
     t.index ["user_id"], name: "index_artworks_on_user_id"
   end
 
+  create_table "followings", force: :cascade do |t|
+    t.bigint "follower_id", null: false
+    t.bigint "followee_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["followee_id"], name: "index_followings_on_followee_id"
+    t.index ["follower_id", "followee_id"], name: "index_followings_on_follower_id_and_followee_id", unique: true
+    t.index ["follower_id"], name: "index_followings_on_follower_id"
+  end
+
   create_table "scrap_comments", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.text "body", null: false
@@ -119,6 +129,8 @@ ActiveRecord::Schema.define(version: 2018_12_03_204254) do
   add_foreign_key "artwork_tags", "artworks", on_delete: :cascade
   add_foreign_key "artwork_tags", "tags", on_delete: :cascade
   add_foreign_key "artworks", "users"
+  add_foreign_key "followings", "users", column: "followee_id", on_delete: :cascade
+  add_foreign_key "followings", "users", column: "follower_id", on_delete: :cascade
   add_foreign_key "scrap_comments", "scraps", on_delete: :cascade
   add_foreign_key "scrap_comments", "users", on_delete: :cascade
   add_foreign_key "scrap_tags", "scraps", on_delete: :cascade

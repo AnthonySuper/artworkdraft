@@ -7,6 +7,22 @@ class User < ApplicationRecord
 
   has_many :artworks
 
+  has_many :followings_followee,
+    class_name: "Following",
+    foreign_key: :follower_id
+  has_many :users_followed,
+    through: :followings_followee,
+    foreign_key: :followee_id,
+    class_name: "User"
+
+  has_many :followings_follower,
+    class_name: "Following",
+    foreign_key: :followee_id
+  has_many :users_following,
+    through: :followings_follower,
+    foreign_key: :follower_id,
+    class_name: "User"
+
 
   has_one_attached :avatar
 
