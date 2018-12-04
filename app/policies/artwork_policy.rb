@@ -16,4 +16,12 @@ class ArtworkPolicy < ApplicationPolicy
   def show?
     true
   end
+
+  def update?
+    owned?
+  end
+
+  def owned?
+    @record.user == @user.user
+  end
 end

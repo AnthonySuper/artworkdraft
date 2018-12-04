@@ -1,5 +1,8 @@
 <template>
-  <div class="new-tags-form">
+  <div v-if="needsFetch">
+    <progress />
+  </div>
+  <div class="new-tags-form" v-else>
     <div v-for="tag in tags"
          :key="tag.id">
       <input type="hidden"
@@ -13,6 +16,8 @@
 
 <script>
 
+import { getJSON } from "../../lib/fetch.js";
+
 export default {
   props: {
     fieldName: String,
@@ -20,10 +25,22 @@ export default {
       type: String,
       default: "",
     },
+    fieldPreloadUrl: {
+      type: String,
+      default: ""
+    },
+    fieldPreloadPath: {
+      type: String,
+      default: ""
+    },
+  },
+  created() {
+    this.fetchInitial();
   },
   data: function() {
     return {
       tags: [],
+      hasFetched: false,
     };
   },
   computed: {
@@ -33,12 +50,23 @@ export default {
     allowCreateBool() {
       return this.allowCreate !== "";
     },
+    needsFetch() {
+      return this.fieldPreloadUrl !== "" && ! this.hasFetched;
+    },
   },
   components: {
     "tag-input": async () => {
       let t = await import("./tag-input.vue");
       return t.default;
     }
+  },
+  methods: {
+    fetchInitial: async function() {
+      if(! this.needsFetch) return;
+      let s = await getJSON(this.fieldPreloadUrl);
+      this.tags = s[this.fieldPreloadPath];
+      this.hasFetched = true;
+    },
   },
 };
 

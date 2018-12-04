@@ -39,6 +39,10 @@
   <div class="field">
     <div data-vue-component="tags/new-tags-form"
          data-field-name="artwork[tag_ids]"
+         <% if artwork.persisted? -%>
+           data-field-preload-url="<%= url_for artwork %>"
+           data-field-preload-path="tags"
+         <% end -%>
          data-allow-create="true">
     </div>
   </div>
