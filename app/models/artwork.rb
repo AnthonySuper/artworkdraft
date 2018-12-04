@@ -4,6 +4,7 @@ class Artwork < ApplicationRecord
   include Worksafe
   include TagSearched
   include Searched
+  include Feeded
 
   # RELATIONS
   belongs_to :user
@@ -20,4 +21,9 @@ class Artwork < ApplicationRecord
   validates :user, presence: true
   validates :name, presence: true
   validates :image, attached: true
+
+  # SCOPES
+  def self.made_by users
+    joins(:user).where(user: users)
+  end
 end

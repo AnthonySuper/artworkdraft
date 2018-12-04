@@ -4,6 +4,7 @@ class Scrap < ApplicationRecord
   include Worksafe
   include TagSearched
   include Searched
+  include Feeded
 
   # RELATIONS 
   belongs_to :user
@@ -22,6 +23,12 @@ class Scrap < ApplicationRecord
   validates :user, presence: true
 
   validates :image, attached: true
+
+
+  # SCOPES
+  def self.made_by users
+    joins(:user).where(user: users)
+  end
 
   # METHODS
   def thumbnail_path
