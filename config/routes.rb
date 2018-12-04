@@ -22,6 +22,8 @@ Rails.application.routes.draw do
     concerns :commentable, commentable_type: "Artwork"
   end
 
+  resources :followings, only: [:create, :destroy]
+
   resources :tags
 
   root to: "home#index"
