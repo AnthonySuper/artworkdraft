@@ -13,7 +13,14 @@
         </figure>
         <div class="media-content">
           <div class="content">
-            <p class="title"><%= @artwork.name %></p>
+            <p class="title">
+              <%= @artwork.name %>
+              <% if policy(@artwork).edit? %>
+                <%= link_to edit_artwork_path(@artwork) do %>
+                  <i class="material-icons">edit</i>
+                <% end %>
+              <% end %>
+            </p>
             <p class="subtitle">
               By <%= link_to @artwork.user.name, @artwork.user %>
             </p>
