@@ -40,7 +40,7 @@
     <div data-vue-component="tags/new-tags-form"
          data-field-name="scrap[tag_ids]"
          <% if @scrap.persisted? %>
-           data-field-preload-url="<%= link_to @scrap %>"
+           data-field-preload-url="<%= url_for @scrap %>"
          <% end %>
          data-field-preload-path="tags"
          data-allow-create="true">

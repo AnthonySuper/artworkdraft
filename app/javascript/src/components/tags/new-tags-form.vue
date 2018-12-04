@@ -1,5 +1,8 @@
 <template>
-  <div class="new-tags-form">
+  <div v-if="needsFetch">
+    <progress />
+  </div>
+  <div class="new-tags-form" v-else>
     <div v-for="tag in tags"
          :key="tag.id">
       <input type="hidden"

@@ -34,6 +34,18 @@ class ScrapsController < ApplicationController
   def edit
   end
 
+  def update
+    respond_to do |format|
+      if @scrap.update(scrap_params)
+        format.html { redirect_to @scrap }
+        format.json { render @scrap }
+      else
+        format.html { render "new", status: 401 }
+        format.json { render @scrap.errors, status: 401 }
+      end
+    end
+  end
+
 
   protected
 
