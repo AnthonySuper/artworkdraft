@@ -7,21 +7,21 @@ class User < ApplicationRecord
 
   has_many :artworks
 
-  has_many :followings_followee,
-    class_name: "Following",
-    foreign_key: :follower_id
-  has_many :users_followed,
-    through: :followings_followee,
-    foreign_key: :followee_id,
-    class_name: "User"
-
-  has_many :followings_follower,
+  has_many :followee_fallowings,
     class_name: "Following",
     foreign_key: :followee_id
   has_many :users_following,
-    through: :followings_follower,
-    foreign_key: :follower_id,
-    class_name: "User"
+    through: :followee_fallowings,
+    class_name: "User",
+    source: :follower
+
+  has_many :follower_fallowings,
+    class_name: "Following",
+    foreign_key: :follower_id
+  has_many :users_followed,
+    through: :follower_fallowings,
+    class_name: "User",
+    source: :followee 
 
 
   has_one_attached :avatar
@@ -30,6 +30,21 @@ class User < ApplicationRecord
   validates :name, presence: true
   validates :email, presence: true
 
+  def followed_by? user
+    users_following.include? user
+  end
+
+  def following? user
+    users_followed.include? user
+  end
+
+  def followable_by? user
+    ! user.nil? && ! followed_by?(user)
+  end
+
+  def unfollowable_by? user
+    ! user.nil? && followed_by?(user)
+  end
 
   def avatar_img
     return avatar.variant(resize: "128x128>") if avatar.attachment
