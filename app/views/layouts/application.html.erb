@@ -24,8 +24,11 @@ gtag('config', 'UA-30487635-6');
 
   </head>
 
-  <body>
+  <body class="overall-site">
     <%= render "navbar" %>
-    <%= yield %>
+    <main class="main-content">
+      <%= yield %>
+    </main>
+    <%= render "footer" %>
   </body>
 </html>
