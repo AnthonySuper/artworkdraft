@@ -7,11 +7,18 @@
 
     <div class="card-content">
       <div class="content">
-        <% if @scrap.name.blank? %>
-          <p class="title grey">Untitled</p>
-        <% else %>
-          <p class="title"><%= @scrap.name %></p>
-        <% end -%>
+        <p class="title">
+          <% if @scrap.name.blank? %>
+            Untitled
+          <% else %>
+            <%= @scrap.name %>
+          <% end -%>
+          <% if policy(@scrap).edit? %>
+            <%= link_to edit_scrap_path(@scrap) do %>
+              <i class="material-icons">edit</i>
+            <% end %>
+          <% end %>
+        
         <p class="subtitle">
           By <%= link_to @scrap.user.name, @scrap.user %>
         </p>

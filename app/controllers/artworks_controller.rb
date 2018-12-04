@@ -1,4 +1,6 @@
 class ArtworksController < ApplicationController
+  before_action :set_artwork,
+    only: [:show, :update, :edit, :destroy]
 
   def index
     @artworks = policy_scope(Artwork)
@@ -11,9 +13,22 @@ class ArtworksController < ApplicationController
 
 
   def show
-    @artwork = Artwork.find(params[:id])
-    authorize @artwork
   end
+
+  def edit
+  end
+
+  def update
+    respond_to do |format|
+      if @artwork.update(artwork_create_params)
+        format.html { redirect_to @artwork }
+        format.json { render @artwork }
+      else
+        format.html { render 'edit', status: 422 }
+        format.json { render @artwork.errors, status: 422 }
+      end
+    end
+  end 
 
   def new
     @artwork = Artwork.new
@@ -40,5 +55,10 @@ class ArtworksController < ApplicationController
     params.require(:artwork)
       .permit(:image, :name, :description, :nsfw, tag_ids: [])
       .merge(user: current_user)
+  end
+  
+  def set_artwork
+    @artwork = Artwork.find(params[:id])
+    authorize @artwork
   end
 end
