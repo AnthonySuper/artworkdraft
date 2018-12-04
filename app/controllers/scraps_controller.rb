@@ -1,4 +1,6 @@
 class ScrapsController < ApplicationController
+  before_action :set_scrap,
+    only: [:show, :edit, :update, :destroy]
 
 
   def index
@@ -27,8 +29,9 @@ class ScrapsController < ApplicationController
   end
 
   def show
-    @scrap = Scrap.find(params[:id])
-    authorize @scrap
+  end
+
+  def edit
   end
 
 
@@ -39,6 +42,11 @@ class ScrapsController < ApplicationController
       .require(:scrap)
       .permit(:image, :name, :description, :nsfw, tag_ids: [])
       .merge(user: current_user)
+  end
+
+  def set_scrap
+    @scrap = Scrap.find(params[:id])
+    authorize @scrap
   end
 
 end
