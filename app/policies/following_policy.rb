@@ -6,11 +6,11 @@ class FollowingPolicy < ApplicationPolicy
   end
 
   def create?
-    is_follower?
+    logged_in? && is_follower?
   end
 
   def destroy?
-    is_follower?
+    logged_in? && is_follower?
   end
 
   protected
