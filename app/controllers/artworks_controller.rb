@@ -50,6 +50,17 @@ class ArtworksController < ApplicationController
     end
   end
 
+  def destroy
+    respond_to do |format|
+      if @artwork.destroy
+        format.html { redirect_to artworks_path }
+      else
+        format.html { redirect_to @artwork }
+      end
+    end
+  end
+
+
   protected
   def artwork_create_params
     params.require(:artwork)

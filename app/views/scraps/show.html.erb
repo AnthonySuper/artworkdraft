@@ -18,21 +18,27 @@
               <i class="material-icons">edit</i>
             <% end %>
           <% end %>
-        
-        <p class="subtitle">
-          By <%= link_to @scrap.user.name, @scrap.user %>
-        </p>
+          <% if policy(@scrap).destroy? %>
+            <%= link_to scrap_path(@scrap),
+              method: :delete,
+              data: { confirm: "Are you certain?" } do %>
+              <i class="material-icons">delete_forever</i>
+            <% end %>
+          <% end %>
 
-        <% unless @scrap.description.blank? %>
-          <p><%= render_markdown @scrap.description %></p>
-        <% end -%>
+          <p class="subtitle">
+            By <%= link_to @scrap.user.name, @scrap.user %>
+          </p>
 
-        <%= render "tags/tag_list",
-          tags: @scrap.tags %>
+          <% unless @scrap.description.blank? %>
+            <p><%= render_markdown @scrap.description %></p>
+          <% end -%>
 
-        <%= time_tag @scrap.created_at %>
+          <%= render "tags/tag_list",
+            tags: @scrap.tags %>
+
+          <%= time_tag @scrap.created_at %>
       </div>
-
     </div>
   </div>
 </div>
