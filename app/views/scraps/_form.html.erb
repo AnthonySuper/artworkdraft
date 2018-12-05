@@ -1,19 +1,29 @@
 <%= form_for @scrap, class: "form" do |f| %>
+
+  <div class="centered-image-container">
+    <% if @scrap.image.attachment %>
+      <%= image_tag @scrap.image.variant(resize: "1000x1000<"), id: "uploadPreview" %>
+    <% else %>
+      <%= image_tag "placeholder_img.svg", id: "uploadPreview" %>
+    <% end %>
+  </div>
   <div class="field">
-    <div class="file">
+    <div class="file is-boxed is-centered has-name">
       <%= f.label :image, class: "file-label" do %>
-        <%= f.file_field :image, class: "file-input" %>
+        <%= f.file_field :image, 
+          class: "file-input is-previewed-file",
+          data: { "file-preview-container": "uploadPreview" } %>
         <span class="file-cta">
-          <span class="file-icon">
-            <i class="fas fa-upload"></i>
-          </span>
           <span class="file-label">
             Choose a file…
           </span>
         </span>
+        <span class="file-name">
+        </span>
       <% end %>
     </div>
   </div>
+
 
   <div class="field">
     <%= f.label :name, "Name (Optional)" %>
