@@ -21,6 +21,10 @@ class ArtworkPolicy < ApplicationPolicy
     owned?
   end
 
+  def destroy?
+    owned?
+  end
+
   def owned?
     @record.user == @user.user
   end

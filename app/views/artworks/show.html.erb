@@ -20,6 +20,13 @@
                   <i class="material-icons">edit</i>
                 <% end %>
               <% end %>
+              <% if policy(@artwork).destroy? %>
+                <%= link_to artwork_path(@artwork),
+                  method: :delete,
+                  data: { confirm: "Are you certain?" } do %>
+                  <i class="material-icons">delete_forever</i>
+                <% end %>
+              <% end %>
             </p>
             <p class="subtitle">
               By <%= link_to @artwork.user.name, @artwork.user %>

@@ -46,6 +46,15 @@ class ScrapsController < ApplicationController
     end
   end
 
+  def destroy
+    respond_to do |format|
+      if @scrap.destroy 
+        format.html { redirect_to scraps_path }
+      else
+        format.html { redirect_to @scrap }
+      end
+    end
+  end
 
   protected
 
