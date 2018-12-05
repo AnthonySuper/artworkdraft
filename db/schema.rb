@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_04_181725) do
+ActiveRecord::Schema.define(version: 2018_12_05_221005) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
+  enable_extension "ltree"
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
@@ -46,6 +47,16 @@ ActiveRecord::Schema.define(version: 2018_12_04_181725) do
     t.datetime "updated_at", null: false
     t.index ["artwork_id"], name: "index_artwork_comments_on_artwork_id"
     t.index ["user_id"], name: "index_artwork_comments_on_user_id"
+  end
+
+  create_table "artwork_reblogs", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "artwork_id"
+    t.ltree "path", default: "", null: false
+    t.text "comment", default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_artwork_reblogs_on_user_id"
   end
 
   create_table "artwork_tags", force: :cascade do |t|
@@ -126,6 +137,8 @@ ActiveRecord::Schema.define(version: 2018_12_04_181725) do
 
   add_foreign_key "artwork_comments", "artworks", on_delete: :cascade
   add_foreign_key "artwork_comments", "users", on_delete: :cascade
+  add_foreign_key "artwork_reblogs", "artworks", on_delete: :nullify
+  add_foreign_key "artwork_reblogs", "users", on_delete: :cascade
   add_foreign_key "artwork_tags", "artworks", on_delete: :cascade
   add_foreign_key "artwork_tags", "tags", on_delete: :cascade
   add_foreign_key "artworks", "users"
