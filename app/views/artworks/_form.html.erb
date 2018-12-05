@@ -1,17 +1,28 @@
 <%= form_for artwork, class: "form" do |f| -%>
+
+  <div class="centered-image-container">
+    <% if artwork.image.attachment %>
+      <%= image_tag artwork.image.variant(resize: "1000x1000<"), id: "uploadPreview" %>
+    <% else %>
+      <%= image_tag "placeholder_img.svg", id: "uploadPreview" %>
+    <% end %>
+  </div>
   <div class="field">
-    <div class="file">
+    <div class="file is-boxed is-centered has-name">
       <%= f.label :image, class: "file-label" do %>
-        <%= f.file_field :image, class: "file-input" %>
-        <span class="file-cta">
-          <span class="file-icon">
-            <i class="fas fa-upload"></i>
-          </span>
-          <span class="file-label">
-            Choose a file…
-          </span>
+        <%= f.file_field :image, 
+          class: "file-input is-previewed-file",
+        data: {"file-preview-container": "uploadPreview"} %>
+      <span class="file-cta">
+        <span class="file-icon">
+          <i class="fas fa-upload"></i>
         </span>
-      <% end %>
+        <span class="file-label">
+          Choose a file…
+        </span>
+      </span>
+      <span class="file-name"></span>
+    <% end %>
     </div>
   </div>
 
@@ -32,7 +43,7 @@
   <div class="field">
     <%= f.label :nsfw do %>
       <%= f.check_box :nsfw %>
-    NSFW?
+      NSFW?
     <% end %>
   </div>
 
@@ -43,7 +54,7 @@
            data-field-preload-url="<%= url_for artwork %>"
            data-field-preload-path="tags"
          <% end -%>
-         data-allow-create="true">
+           data-allow-create="true">
     </div>
   </div>
 
