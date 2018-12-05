@@ -7,9 +7,13 @@ module ActiveStorage
     def show
       expires_in 1.year, public: true
       variant = @blob.representation(params[:variation_key]).processed
-      send_data @blob.service.download(variant.key),
-                type: @blob.content_type || DEFAULT_SEND_FILE_TYPE,
-                disposition: 'inline'
+      send_file_headers!(type: @blob.content_type || DEFAULT_SEND_FILE_TYPE,
+                         disposition: 'inline')
+      self.response_body = Enumerator.new do |f|
+        @blob.service.download(variant.key) do |chunk|
+          f << chunk
+        end
+      end
     end
   end
 end
