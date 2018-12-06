@@ -26,6 +26,8 @@ Rails.application.routes.draw do
 
   resources :tags
 
+  resources :artwork_reblogs
+
   scope "feeds" do
     root to: "feeds#index"
     get "artworks", to: "feeds#artworks"
