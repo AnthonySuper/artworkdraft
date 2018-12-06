@@ -16,6 +16,11 @@ class FeedsController < ApplicationController
       .feed_for(current_user)
   end
 
+  def artwork_reblogs
+    @artwork_reblogs = policy_scope(ArtworkReblog)
+      .feed_for(current_user)
+  end
+
   protected
   
   def feeds_desc

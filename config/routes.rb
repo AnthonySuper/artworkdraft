@@ -26,10 +26,13 @@ Rails.application.routes.draw do
 
   resources :tags
 
+  resources :artwork_reblogs
+
   scope "feeds" do
     root to: "feeds#index"
     get "artworks", to: "feeds#artworks"
     get "scraps", to: "feeds#scraps"
+    get "artwork_reblogs", to: "feeds#artwork_reblogs"
   end
 
   root to: "home#index"
