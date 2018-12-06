@@ -12,6 +12,12 @@ RSpec.describe ArtworkReblog, type: :model do
         }.to_not raise_error
       end
 
+      it "allows many root reblogs" do
+        expect {
+          10.times { create(:artwork_reblog, artwork: artwork) }
+        }.to_not raise_error
+      end
+
       it "differentiates root reblog paths" do
         a, b = 2.times.map{ create(:artwork_reblog, artwork: artwork) }
         expect(a.path).to_not eq(b.path)

@@ -15,7 +15,7 @@ class ArtworkReblog < ApplicationRecord
     joins(%{
       INNER JOIN artwork_reblogs root 
           ON root.path = subpath(artwork_reblogs.path, 0, 2) })
-      .joins("INNER JOIN artworks ON artworks.id = root.id")
+      .joins("INNER JOIN artworks ON artworks.id = root.artwork_id")
       .where("artworks.id" => artworks)
   end
 

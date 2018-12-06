@@ -32,6 +32,9 @@ export default {
     userLink() {
       return `/users/${this.user.id}`;
     },
+    hasComment() {
+      return this.comment !== "";
+    }
   },
   components: {
     "vue-markdown": async () => {

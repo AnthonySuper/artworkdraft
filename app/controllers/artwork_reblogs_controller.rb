@@ -6,8 +6,11 @@ class ArtworkReblogsController < ApplicationController
     @artwork_reblog = ArtworkReblog.new(artwork_reblog_params)
     authorize @artwork_reblog
     respond_to do |format|
-      format.html
-      format.json { render @artwork_reblog }
+      if @artwork_reblog.save 
+        format.json { render @artwork_reblog }
+      else
+        format.json { render @artwork_reblog.errors, status: 422 }
+      end
     end
   end
 

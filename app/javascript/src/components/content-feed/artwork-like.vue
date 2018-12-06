@@ -24,7 +24,10 @@
               By {{userName}}
             </h3>
             <p class="content">
-              <vue-markdown html="false">{{artworkDescription}}</vue-markdown>
+              <!-- awkward spacing prevents markdown from seeing the first line
+                as super indented -->
+              <vue-markdown v-bind:html="false">{{artworkDescription}}
+              </vue-markdown>
             </p>
           </div>
         </div>
