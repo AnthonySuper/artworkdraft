@@ -12,9 +12,13 @@ class ArtworkReblog < ApplicationRecord
   def self.for_artworks artworks
     joins(%{
       INNER JOIN artwork_reblogs root 
-          ON root.path = subpath(artwork_reblogs.path, 0, 1) })
+          ON root.path = subpath(artwork_reblogs.path, 0, 2) })
       .joins("INNER JOIN artworks ON artworks.id = root.id")
       .where("artworks.id" => artworks)
+  end
+
+  def root_artwork
+    Artwork.find(path.split(".").first)
   end
 
   def ordered_ancestors
@@ -36,7 +40,9 @@ class ArtworkReblog < ApplicationRecord
 
   def create_path
     if artwork.present? then
-      self.path = (ArtworkReblog.where(artwork: artwork).count).to_s
+      part_1 = artwork.id.to_s
+      part_2 = (ArtworkReblog.where(artwork: artwork).count).to_s
+      self.path = "#{part_1}.#{part_2}"
     else
       self.path = ArtworkReblog.find(ancestor_id).next_path
     end
