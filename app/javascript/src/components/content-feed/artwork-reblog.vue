@@ -1,5 +1,5 @@
 <template>
-  <artwork v-bind="root_artwork">
+  <artwork v-bind="artworkParams">
     <reblog-ancestor
       v-for="ancestor in ancestors"
       v-bind="ancestor" />
@@ -14,11 +14,22 @@ export default {
     root_artwork: Object,
     id: Number,
     comment: String,
-    ancestors: Array
+    ancestors: Array,
+    user: Object,
   },
   components: {
     "artwork": Artwork,
     "reblog-ancestor": ReblogAncestor,
+  },
+  computed: {
+    artworkParams() {
+      return Object.assign({}, 
+        this.root_artwork,
+        { 
+          ancestorId: this.id, 
+          appearReason: `Reblogged by ${this.user.name}`, 
+        });
+    },
   },
 };
 </script>

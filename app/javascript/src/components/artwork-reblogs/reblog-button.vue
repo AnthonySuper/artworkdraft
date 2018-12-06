@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  props: ["artworkId"],
+  props: ["artworkId", "ancestorId"],
   data: () => ({showForm: false, hasSubmitted: false}),
   methods: {
     clickButton: function(evt) {
@@ -18,6 +18,7 @@ export default {
       this.showForm = true;
     },
     setSubmit: function() {
+      this.showForm = false;
       this.hasSubmitted = true;
     }
   },

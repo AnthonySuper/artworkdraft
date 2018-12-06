@@ -1,16 +1,18 @@
 <template>
-  <form class="form" v-on:submit="submitForm">
-    <div class="field">
-      <label class="label" for="comment">
-        Add a comment (optional)
-      </label>
-      <textarea class="textarea" v-model="comment" />
-    </div>
-    
-    <button class="button">
-      Reblog
-    </button>
-  </form>
+  <section class="section">
+    <form class="form" v-on:submit="submitForm">
+      <div class="field">
+        <label class="label" for="comment">
+          Add a comment (optional)
+        </label>
+        <textarea class="textarea" v-model="comment" />
+      </div>
+      
+      <button class="button">
+        Reblog
+      </button>
+    </form>
+  </section>
 </template>
 
 <script>
@@ -21,12 +23,16 @@ export default {
   data: () => ({ comment: "" }),
   computed: {
     formData: function() {
+      let rb = { comment: this.comment }
+      if(this.ancestorId) {
+        rb.ancestor_id = this.ancestorId;
+      }
+      else {
+        rb.artwork_id = this.artworkId;
+      }
+
       return {
-        artwork_reblog: {
-          comment: this.comment,
-          artwork_id: this.artworkId,
-          ancestor_id: this.ancestor_id,
-        },
+        artwork_reblog: rb,
       };
     },
   },

@@ -7,7 +7,10 @@
     </figure>
     <div class="media-content">
       <div class="content">
-        <p><a v-bind:href="userLink">{{user.name}}</a> Reblogged</p>
+        <p>
+        <span><a v-bind:href="userLink">{{user.name}}</a> Reblogged</span>
+        <timeago :datetime="created_at" :auto-update="60"></timeago>
+        </p>
         <p class="content">
           <vue-markdown v-bind:html="false">{{comment}}</vue-markdown>
         </p>
@@ -18,7 +21,12 @@
     <a class="image is-24x24"  v-bind:href="userLink">
       <img v-bind:src="user.avatar" />
     </a>
-    <p><a v-bind:href="userLink">{{user.name}}</a> Reblogged</p>
+    <p><a v-bind:href="userLink">{{user.name}}</a>
+    Reblogged
+      <timeago v-bind:auto-update="60"
+               :datetime="created_at"></timeago>
+    </p>
+
   </section>
 </template>
 <script>
@@ -27,6 +35,7 @@ export default {
   props: {
     user: Object,
     comment: String,
+    created_at: String,
   },
   computed: {
     userLink() {
@@ -41,6 +50,10 @@ export default {
       const vm = await import("vue-markdown");
       return vm.default;
     },
+    "timeago": async () => {
+      const ti = await import("vue-timeago");
+      return ti.createTimeago();
+    },
   },
 };
 </script>
@@ -54,6 +67,6 @@ export default {
 }
 
 .tiny-reblog a.image {
-  margin-right: 1rem;
+  margin-right: 0.5rem;
 }
 </style>

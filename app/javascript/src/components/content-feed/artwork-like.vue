@@ -3,7 +3,7 @@
     <div class="card">
       <header class="card-header">
         <p class="card-header-title">
-          Following {{userName}}
+          {{appearReason_}}
         </p>
       </header>
       <a class="card-image centered-image-container" v-bind:href="sourceLink">
@@ -33,6 +33,10 @@
         </div>
           <slot />
       </div>
+      <div class="card-footer footer-form-container" v-if="canReblog">
+        <reblog-button :ancestor-id="reblogAncestorId"
+          :artwork-id="reblogArtworkId" />
+      </div>
     </div>
   </div>
 </template>
@@ -48,14 +52,33 @@ export default {
     userId: Number,
     imageUrl: String,
     artworkDescription: String,
+    appearReason: String,
+    canReblog: {
+      type: Boolean,
+      default: false,
+    },
+    reblogArtworkId: Number,
+    reblogAncestorId: Number,
   },
   computed: {
-    userLink: function() {
+    userLink() {
       return `/users/${this.userId}`;
+    },
+    appearReason_() {
+      if(this.appearReason) {
+        return this.appearReason;
+      }
+      else {
+        return `Following ${this.userName}`;
+      }
     },
   },
   components: {
     "vue-markdown": VueMarkdown,
+    "reblog-button": async () => {
+      const c = await import("../artwork-reblogs/reblog-button.vue");
+      return c.default;
+    },
   },
 }
 </script>
@@ -63,5 +86,14 @@ export default {
 <style>
 .card-spacer {
   margin: 1.5rem 0;
+}
+
+.card-footer .material-icons {
+  line-height: unset;
+}
+
+.card-footer.footer-form-container .section {
+  flex-grow: 1;
+  display: block;
 }
 </style>
