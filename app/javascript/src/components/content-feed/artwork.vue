@@ -1,9 +1,13 @@
 <template>
   <artwork-like
-    v-bind="artworkParams" />
+    v-bind="artworkParams">
+    <slot />
+  </artwork-like>
 </template>
+
 <script>
 export default {
+  name: "artwork",
   props: {
     id: Number,
     name: String,
@@ -14,6 +18,8 @@ export default {
     },
     description: String,
     image_url: String,
+    ancestorId: Number,
+    appearReason: String,
   },
   computed: {
     artworkLink: function() {
@@ -26,6 +32,12 @@ export default {
         userAvatar: this.user.avatar,
         imageUrl: this.image_url,
         sourceLink: this.artworkLink,
+        name: this.name,
+        artworkDescription: this.description,
+        canReblog: true,
+        reblogArtworkId: this.id,
+        reblogAncestorId: this.ancestorId,
+        appearReason: this.appearReason,
       }
     },
   },

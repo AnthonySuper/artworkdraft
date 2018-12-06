@@ -23,7 +23,7 @@ export default {
     artworkParams: function() {
       return {
         name: this.name,
-        description: this.description,
+        artworkDescription: this.description,
         sourceLink: this.scrapLink,
         userAvatar: this.user.avatar,
         userName: this.user.name,
