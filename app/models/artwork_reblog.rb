@@ -1,4 +1,6 @@
 class ArtworkReblog < ApplicationRecord
+  include Feeded
+
   belongs_to :user
   belongs_to :artwork, required: false
 
@@ -15,6 +17,10 @@ class ArtworkReblog < ApplicationRecord
           ON root.path = subpath(artwork_reblogs.path, 0, 2) })
       .joins("INNER JOIN artworks ON artworks.id = root.id")
       .where("artworks.id" => artworks)
+  end
+
+  def self.made_by users
+    where(user: users)
   end
 
   def root_artwork

@@ -1,7 +1,7 @@
 class ArtworkReblogPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      scope.with_artworks(ArtworkPolicy::Scope.new(@user, Artwork.all).resolve)
+      scope.for_artworks(ArtworkPolicy::Scope.new(@user, Artwork.all).resolve)
     end
   end
 

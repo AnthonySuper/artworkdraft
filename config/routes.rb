@@ -32,6 +32,7 @@ Rails.application.routes.draw do
     root to: "feeds#index"
     get "artworks", to: "feeds#artworks"
     get "scraps", to: "feeds#scraps"
+    get "artwork_reblogs", to: "feeds#artwork_reblogs"
   end
 
   root to: "home#index"
