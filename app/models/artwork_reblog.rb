@@ -18,6 +18,7 @@ class ArtworkReblog < ApplicationRecord
   end
 
   def root_artwork
+    return artwork if artwork
     Artwork.find(path.split(".").first)
   end
 

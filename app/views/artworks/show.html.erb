@@ -15,6 +15,11 @@
           <div class="content">
             <p class="title">
               <%= @artwork.name %>
+              <% if policy(ArtworkReblog.new(artwork: @artwork)).create? %>
+                <div data-vue-component="artwork-reblogs/reblog-button"
+                     data-artwork-id="<%= @artwork.id %>">
+                </div>
+              <% end %>
               <% if policy(@artwork).edit? %>
                 <%= link_to edit_artwork_path(@artwork) do %>
                   <i class="material-icons">edit</i>
