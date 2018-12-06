@@ -1,6 +1,7 @@
 <template>
   <reblog-form v-if="showForm"
                v-on:reblog-created="setSubmit"
+               v-bind:ancestor-id="ancestorId"
                v-bind:artwork-id="artworkId" />
   <i v-else-if="hasSubmitted" class="material-icons">check</i>
   <a v-else href="#" v-on:click="clickButton">
