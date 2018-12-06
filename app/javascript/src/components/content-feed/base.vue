@@ -54,10 +54,12 @@ export default {
     },
     fetchData: async function() {
       this.startLoading();
-      let [arts$, scraps$] = await Promise.all([
+      let [arts$, scraps$, arbls$] = await Promise.all([
         getJSON("/feeds/artworks"),
         getJSON("/feeds/scraps"),
+        getJSON("/feeds/artwork_reblogs"),
       ]);
+      console.log(arbls$);
       let arts = arts$.map(a => ({
         data: a, 
         type: "artwork", 
@@ -70,7 +72,13 @@ export default {
         sortDate: new Date(s.created_at),
         id: `scrap-${s.id}`
       }));
-      this.addFeedItems(arts.concat(scraps));
+      let arbls = arbls$.map(a => ({
+        data: a,
+        type: "artwork-reblog",
+        sortDate: new Date(a.created_at),
+        id: `artwork-reblog-${a.id}`,
+      }));
+      this.addFeedItems(arts.concat(scraps).concat(arbls));
       this.endLoading();
       this.fetchedInitial = true;
     },

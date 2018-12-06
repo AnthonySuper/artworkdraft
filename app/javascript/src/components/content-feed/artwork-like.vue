@@ -23,13 +23,19 @@
             <h3 class="subtitle">
               By {{userName}}
             </h3>
+            <p class="content">
+              <vue-markdown html="false">{{artworkDescription}}</vue-markdown>
+            </p>
           </div>
         </div>
+          <slot />
       </div>
     </div>
   </div>
 </template>
 <script>
+import VueMarkdown from "vue-markdown";
+
 export default {
   props: {
     userAvatar: String,
@@ -38,11 +44,15 @@ export default {
     sourceLink: String,
     userId: Number,
     imageUrl: String,
+    artworkDescription: String,
   },
   computed: {
     userLink: function() {
       return `/users/${this.userId}`;
     },
+  },
+  components: {
+    "vue-markdown": VueMarkdown,
   },
 }
 </script>

@@ -1,9 +1,12 @@
 <template>
   <artwork-like
-    v-bind="artworkParams" />
+    v-bind="artworkParams">
+    <slot />
+  </artwork-like>
 </template>
 <script>
 export default {
+  name: "artwork",
   props: {
     id: Number,
     name: String,
@@ -26,6 +29,8 @@ export default {
         userAvatar: this.user.avatar,
         imageUrl: this.image_url,
         sourceLink: this.artworkLink,
+        name: this.name,
+        artworkDescription: this.description,
       }
     },
   },
