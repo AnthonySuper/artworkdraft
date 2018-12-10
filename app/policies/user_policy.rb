@@ -9,6 +9,22 @@ class UserPolicy < ApplicationPolicy
     true
   end
 
+  def feed?
+    show?
+  end
+
+  def artworks?
+    show?
+  end
+
+  def scraps?
+    show?
+  end
+
+  def artwork_reblogs?
+    show?
+  end
+
   def create?
     ! logged_in?
   end

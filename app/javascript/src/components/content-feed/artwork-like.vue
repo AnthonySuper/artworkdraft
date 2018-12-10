@@ -34,7 +34,10 @@
           <slot />
       </div>
       <div class="card-footer footer-form-container" v-if="canReblog">
-        <reblog-button :ancestor-id="reblogAncestorId"
+        <reblog-button 
+          class="card-footer-item"
+          :ancestor-id="reblogAncestorId"
+
           :artwork-id="reblogArtworkId" />
       </div>
     </div>

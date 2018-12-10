@@ -1,0 +1,39 @@
+<section class="section">
+  <div class="container">
+    <div class="media">
+      <figure class="media-left">
+        <p class="image is-128x128">
+          <%= image_tag @user.avatar_img %>
+        </p>
+      </figure>
+      <div class="media-content">
+        <div class="content">
+          <h1 class="title">
+            <%= @user.name %>
+            <span> </span>
+            <% if @user == current_user %>
+              <%= link_to edit_user_path(@user), class: "material-icons" do %>
+                <i class="material-icons">edit</i>
+              <% end -%>
+            <% end -%>
+            <% if @user.followable_by? current_user -%>
+              <%= form_for Following.new(followee: @user) do |f| %>
+                <%= f.hidden_field :followee_id %>
+                <%= f.submit "Follow", class: "button is-primary" %>
+              <% end -%>
+            <% end -%>
+            <% if @user.unfollowable_by? current_user -%>
+              <%= form_tag following_path(@user.id), method: :delete do -%>
+                <%= submit_tag "Unfollow", class: "button is-danger" -%>
+              <% end -%>
+            <% end -%>
+          </h1>
+          <div class="text">
+            <%= @user.bio %>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+
+
