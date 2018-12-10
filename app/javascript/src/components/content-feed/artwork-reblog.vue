@@ -2,6 +2,7 @@
   <artwork v-bind="artworkParams">
     <reblog-ancestor
       v-for="ancestor in ancestors"
+      :key="ancestor.id"
       v-bind="ancestor" />
   </artwork>
 </template>

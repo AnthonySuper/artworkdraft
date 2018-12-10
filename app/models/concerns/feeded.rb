@@ -11,5 +11,9 @@ module Feeded
         all
       end
     end
+
+    def self.created_feed_for user
+      made_by(user)
+    end
   end
 end

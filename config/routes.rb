@@ -1,7 +1,13 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   #
-  resources :users
+  resources :users do
+    member do
+      get "artworks", to: "feeds#artworks", feed_type: :created
+      get "artwork_reblogs", to: "feeds#artwork_reblogs", feed_type: :created
+      get "scraps", to: "feeds#scraps", feed_type: :created
+    end
+  end
 
 
   resources :sessions do
