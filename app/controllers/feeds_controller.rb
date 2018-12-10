@@ -1,4 +1,7 @@
 class FeedsController < ApplicationController
+  before_action :set_user,
+    if: :is_created?
+
   def index
     respond_to do |format|
       format.html
@@ -7,21 +10,50 @@ class FeedsController < ApplicationController
   end
 
   def artworks
-    @artworks = policy_scope(Artwork)
-      .feed_for(current_user)
+    @artworks = feeded(policy_scope(Artwork))
+    respond_to do |format|
+      format.json
+      format.html do
+        if is_created?
+          render "users/artworks"
+        else
+          head(:not_acceptable)
+        end
+      end
+    end
   end
 
   def scraps
-    @scraps = policy_scope(Scrap)
-      .feed_for(current_user)
+    @scraps = feeded(policy_scope(Scrap))
+    respond_to do |format|
+      format.json
+      format.html do
+        if is_created?
+          render "users/scraps"
+        else
+          head(:not_acceptable)
+        end
+      end
+    end
   end
 
   def artwork_reblogs
-    @artwork_reblogs = policy_scope(ArtworkReblog)
-      .feed_for(current_user)
+    @artwork_reblogs = feeded(policy_scope(ArtworkReblog))
   end
 
   protected
+
+  def is_created?
+    params["feed_type"].to_s == "created"
+  end
+
+  def feeded collection
+    if is_created?
+      collection.created_feed_for(@user)
+    else
+      collection.feed_for(current_user)
+    end
+  end
   
   def feeds_desc
     {
@@ -34,5 +66,10 @@ class FeedsController < ApplicationController
         type: "scrap",
       }
     }
+  end
+
+  def set_user
+    @user = User.find(params[:id])
+    authorize @user
   end
 end

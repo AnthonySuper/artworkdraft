@@ -1,0 +1,16 @@
+<%= render "users/bio_section" %>
+
+<section class="section">
+  <div class="container">
+    <%= render "users/tabs" %>
+    <div class="columns is-multiline">
+      <%= render partial: "scraps/column_scrap", 
+        collection: policy_scope(@user.scraps),
+        as: :scrap,
+        cache: true
+      %>
+    </div>
+  </div>
+</section>
+
+

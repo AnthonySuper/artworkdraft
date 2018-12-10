@@ -1,9 +1,13 @@
 <template>
   <reblog-form v-if="showForm"
-               v-on:reblog-created="setSubmit"
-               v-bind:ancestor-id="ancestorId"
-               v-bind:artwork-id="artworkId" />
-  <i v-else-if="hasSubmitted" class="material-icons">check</i>
+               @reblog-created="setSubmit"
+               @reblog-canceled="setCanceled"
+               :ancestor-id="ancestorId"
+               :artwork-id="artworkId">
+  </reblog-form>
+  <a v-else-if="hasSubmitted">
+    <i class="material-icons">check</i>
+  </a>
   <a v-else href="#" v-on:click="clickButton">
     <i class="material-icons">replay</i>
   </a>
@@ -21,6 +25,10 @@ export default {
     setSubmit: function() {
       this.showForm = false;
       this.hasSubmitted = true;
+    },
+    setCanceled: function() {
+      this.showForm = false;
+      this.hasSubmitted = false;
     }
   },
   components: {

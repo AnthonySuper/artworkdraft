@@ -1,0 +1,13 @@
+<div class="tabs">
+  <ul>
+    <li class="<%= action_class :show %>">
+      <%= link_to "Feed", user_path(@user) %>
+    </li>
+    <li class="<%= action_class :artworks %>">
+      <%= link_to "Artworks", artworks_user_path(@user) %>
+    </li>
+    <li class="<%= action_class :scraps %>">
+      <%= link_to "Scraps", scraps_user_path(@user) %>
+    </li>
+  </ul>
+</div>

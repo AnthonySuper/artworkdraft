@@ -1,8 +1,12 @@
 class UsersController < ApplicationController
 
-  before_action :load_user, only: [:show, :edit, :update, :destroy]
+  before_action :load_user, only: 
+    [:show, :edit, :update, :destroy, :feed]
 
   def show
+  end
+
+  def feed
   end
 
   def index 
@@ -39,7 +43,6 @@ class UsersController < ApplicationController
       end
     end
   end
-
 
   protected
 

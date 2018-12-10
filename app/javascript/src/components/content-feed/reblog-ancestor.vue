@@ -1,5 +1,5 @@
 <template>
-  <section class="media" v-if="hasComment">
+  <section class="media">
     <figure class="media-left">
       <a class="image is-64x64" v-bind:href="userLink">
         <img v-bind:src="user.avatar" />
@@ -16,17 +16,6 @@
         </p>
       </div>
     </div>
-  </section>
-  <section class="tiny-reblog" v-else>
-    <a class="image is-24x24"  v-bind:href="userLink">
-      <img v-bind:src="user.avatar" />
-    </a>
-    <p><a v-bind:href="userLink">{{user.name}}</a>
-    Reblogged
-      <timeago v-bind:auto-update="60"
-               :datetime="created_at"></timeago>
-    </p>
-
   </section>
 </template>
 <script>
