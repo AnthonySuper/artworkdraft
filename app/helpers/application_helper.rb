@@ -1,5 +1,9 @@
 module ApplicationHelper
 
+  def page_title(title)
+    provide(:title) { title }
+  end
+
   def render_markdown str
     (markdown_renderer.render str).html_safe
   end
