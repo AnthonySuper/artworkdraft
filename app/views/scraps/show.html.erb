@@ -1,50 +1,63 @@
 <% page_title "\"#{@scrap.name || "Untitled"}\" by #{@scrap.user.name}" %>
+<% meta_tag :description, @scrap.description %>
+<% meta_tag :keywords, tags_to_keywords(@scrap.tags) %>
+<% og_tag(:image, 
+  url_for(@scrap.image.variant(resize: "1000x1000>"))) %>
+<% og_tag :image_alt, @scrap.description %>
+<div itemscope itemtype="https://schema.org/VisualArtwork">
+    
+  <div class="section">
+    <div class="card">
+      <%= link_to url_for(@scrap.image),
+        itemprop: "image",
+        class: "card-image centered-image-container" do %>
+        <%= image_tag @scrap.image.variant(resize: "1000x1000>") %>
+      <% end %>
 
-<div class="section">
-  <div class="card">
-    <%= link_to url_for(@scrap.image),
-      class: "card-image centered-image-container" do %>
-      <%= image_tag @scrap.image.variant(resize: "1000x1000>") %>
-    <% end %>
-
-    <div class="card-content">
-      <div class="content">
-        <p class="title">
-          <% if @scrap.name.blank? %>
-            Untitled
-          <% else %>
-            <%= @scrap.name %>
-          <% end -%>
-          <% if policy(@scrap).edit? %>
-            <%= link_to edit_scrap_path(@scrap) do %>
-              <i class="material-icons">edit</i>
+      <div class="card-content">
+        <div class="content">
+          <p class="title">
+            <span itemprop="headline">
+              <% if @scrap.name.blank? %>
+                Untitled
+              <% else %>
+                <%= @scrap.name %>
+              <% end -%>
+            </span>
+            <% if policy(@scrap).edit? %>
+              <%= link_to edit_scrap_path(@scrap) do %>
+                <i class="material-icons">edit</i>
+              <% end %>
             <% end %>
-          <% end %>
-          <% if policy(@scrap).destroy? %>
-            <%= link_to scrap_path(@scrap),
-              method: :delete,
-              data: { confirm: "Are you certain?" } do %>
-              <i class="material-icons">delete_forever</i>
+            <% if policy(@scrap).destroy? %>
+              <%= link_to scrap_path(@scrap),
+                method: :delete,
+                data: { confirm: "Are you certain?" } do %>
+                <i class="material-icons">delete_forever</i>
+              <% end %>
             <% end %>
-          <% end %>
 
-          <p class="subtitle">
-            By <%= link_to @scrap.user.name, @scrap.user %>
-          </p>
+            <p class="subtitle">
+              By 
+              <%= link_to @scrap.user.name, @scrap.user, 
+                rel: "author", itemprop: "author" %>
+            </p>
+            <meta itemprop="description"
+                  content="<%= @scrap.description %>" />
+            <% unless @scrap.description.blank? %>
+              <p><%= render_markdown @scrap.description %></p>
+            <% end -%>
 
-          <% unless @scrap.description.blank? %>
-            <p><%= render_markdown @scrap.description %></p>
-          <% end -%>
+            <%= render "tags/tag_list",
+              tags: @scrap.tags %>
 
-          <%= render "tags/tag_list",
-            tags: @scrap.tags %>
-
-          <%= time_tag @scrap.created_at %>
+            <%= time_tag @scrap.created_at, itemprop: "dateCreated" %>
+        </div>
       </div>
     </div>
   </div>
+
+
+  <%= render partial: "comments/comment_section",
+    locals: { comments: @scrap.comments, commentable: @scrap } %>
 </div>
-
-
-<%= render partial: "comments/comment_section",
-  locals: { comments: @scrap.comments, commentable: @scrap } %>

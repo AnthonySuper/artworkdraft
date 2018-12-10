@@ -1,4 +1,7 @@
-<article class="media">
+<article class="media"
+         itemscope
+         itemtype="https://schema.org/Comment"
+         itemprop="comment">
   <figure class="media-left">
     <p class="image is-128x128">
       <%= image_tag comment.user.avatar_img %>
@@ -7,15 +10,18 @@
   <div class="media-content">
     <div class="content">
       <p>
-        <%= link_to comment.user, class: "title" do %>
+      <%= link_to comment.user, 
+        class: "title", rel: "author", itemprop: "author" do %>
           <%= comment.user.name %>
         <% end %>
       </p>
+      <meta itemprop="text"
+            content="<%= comment.body %>" />
       <p>
         <%= render_markdown comment.body %>
       </p>
       <br />
-      <small><%= time_tag comment.created_at %></small>
+      <small><%= time_tag comment.created_at, itemprop: "dateCreated" %></small>
     </div>
   </div>
 </article>

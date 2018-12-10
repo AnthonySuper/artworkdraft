@@ -2,9 +2,24 @@
 <html>
   <head>
     <title>
-      <%= if content_for?(:title) then yield(:title) + ' | ' end %>
+      <%= yield_page_title %>
       Artworkdraft
     </title>
+    <meta name="description"
+          content="<%= yield_meta_tag(:description, default_meta_description) %>"
+          />
+    <meta name="keywords"
+          content="<%= yield_meta_tag(:keywords, "") %>"
+          />
+    <meta property="og:title" 
+          content="<%= yield_page_title %> ArtWorkDraft" />
+    <meta property="og:site_name" content="ArtWorkDraft" />
+    <meta property="og:image:url" content="<%= yield_og_tag(:image) %>" />
+    <meta property="og:image:alt" content="<%= yield_og_tag(:image_alt) %>" />
+    <meta property="og:type" 
+          content="<%= yield_og_tag(:type, "website") %>" />
+    <meta property="og:url"
+          content="<%= request.url %>" />
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <meta name="viewport" content="width=device-width, initial-scale=1">
