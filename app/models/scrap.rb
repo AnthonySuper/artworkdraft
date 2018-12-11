@@ -5,6 +5,7 @@ class Scrap < ApplicationRecord
   include TagSearched
   include Searched
   include Feeded
+  include Paginated
 
   # RELATIONS 
   belongs_to :user
