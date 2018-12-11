@@ -1,11 +1,9 @@
 module ApplicationHelper
 
   def next_page collection
-    np = {
-      per_page: params[:per_page],
-      prefs: params[:prefs],
-      search: params[:search]
-    }
+    np = params.permit(:per_page,
+                       prefs: {},
+                       search: {})
     min = collection.to_a.map(&:created_at).min.to_f
     url_for(np.merge(page_after: min))
   end
