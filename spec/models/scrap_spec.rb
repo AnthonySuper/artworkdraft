@@ -18,15 +18,15 @@ RSpec.describe Scrap, type: :model do
     let(:first) { create(:scrap) }
     let(:second) { create(:scrap) }
     let(:third) { create(:scrap) }
-    before(:each) { [first, second, third] }
+    before(:each) { first; second; third; }
     describe "page_after" do
       it "works with the created thing" do
-        expect(Scrap.page_after(second.created_at)).to contain_exactly(third)
+        expect(Scrap.page_after(second.created_at)).to contain_exactly(first)
       end
     end
     describe "page_before" do
       it "works with the second created" do
-        expect(Scrap.page_before(second.created_at)).to contain_exactly(first)
+        expect(Scrap.page_before(second.created_at)).to contain_exactly(third)
       end
     end
   end

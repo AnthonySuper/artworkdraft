@@ -10,7 +10,8 @@ class UsersController < ApplicationController
   end
 
   def index 
-    @users = User.all
+    @users = paginate(policy_scope(User.all))
+    authorize @users
   end  
 
   def new

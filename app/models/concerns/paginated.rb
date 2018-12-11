@@ -9,7 +9,7 @@ module Paginated
     end
 
     def self.page_after timestamp
-      paginate_order.where("created_at > ?", timestamp)
+      paginate_order.where("#{self.table_name}.created_at < ?", timestamp)
     end
 
     def self.paginate_order
@@ -21,7 +21,7 @@ module Paginated
     end
 
     def self.page_before timestamp
-      reverse_paginate_order.where("created_at < ?", timestamp)
+      reverse_paginate_order.where("#{self.table_name}.created_at > ?", timestamp)
     end
   end
 end

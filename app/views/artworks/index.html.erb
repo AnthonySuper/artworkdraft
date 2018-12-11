@@ -15,5 +15,7 @@
 <div class="section">
   <div class="container">
     <%= render @artworks, cached: true %>
+
+    <%= render "page_level", collection: @artworks %>
   </div>
 </div>

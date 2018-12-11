@@ -18,18 +18,18 @@ RSpec.describe Artwork, type: :model do
     let(:first) { create(:artwork) }
     let(:second) { create(:artwork) }
     let(:third) { create(:artwork) }
-    before(:each) { [first, second, third] }
+    before(:each) { first; second; third; }
     describe "page_after" do
       it "works with the second result" do
         after = Artwork.page_after(second.created_at)
-        expect(after).to contain_exactly(third)
+        expect(after).to contain_exactly(first)
       end
     end
 
     describe "page_before" do
       it "works with the second result" do
         before = Artwork.page_before(second.created_at)
-        expect(before).to contain_exactly(first)
+        expect(before).to contain_exactly(third)
       end
     end
   end

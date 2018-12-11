@@ -45,17 +45,17 @@ RSpec.describe ArtworkReblog, type: :model do
     let(:first) { create(:artwork_reblog) }
     let(:second) { create(:artwork_reblog) }
     let(:third) { create(:artwork_reblog) }
-    before(:each) { [first, second, third] }
+    before(:each) { first; second; third }
     describe "page_after" do
       it "works with the second" do
         after = ArtworkReblog.page_after(second.created_at)
-        expect(after).to contain_exactly(third)
+        expect(after).to contain_exactly(first)
       end
     end
     describe "page_before" do
       it "works with the second" do
         before = ArtworkReblog.page_before(second.created_at)
-        expect(before).to contain_exactly(first)
+        expect(before).to contain_exactly(third)
       end
     end
   end
