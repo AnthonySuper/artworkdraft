@@ -8,8 +8,11 @@ class SessionsController < ApplicationController
       .try(:authenticate, login_params[:password])
     if @user.nil? then 
       redirect_to new_session_path
-    else
+    elsif @user.email_confirmed?
       session[:user_id] = @user.id
+      redirect_back(fallback_location: "/")
+    else
+      flash[:notice] = "Email not confirmed. Please check your email."
       redirect_back(fallback_location: "/")
     end
   end

@@ -25,12 +25,18 @@ class User < ApplicationRecord
     class_name: "User",
     source: :followee 
 
-
+  # ATTACHMENTS
   has_one_attached :avatar
 
+  # TOKENS
+  has_secure_token :email_confirmation_token
 
+  # VALIDATIONS
   validates :name, presence: true
   validates :email, presence: true
+
+  # HOOKS
+  after_create :verify_email!
 
   def followed_by? user
     users_following.include? user
@@ -56,5 +62,14 @@ class User < ApplicationRecord
   def small_avatar_img
     return avatar&.variant(resize: "64x64>") if avatar.attachment
     "default_square.png"
+  end
+
+  def verify_email!(later = true)
+    t = EmailValidatorMailer.with(user: self).verify_email
+    if later
+      t.deliver_later
+    else
+      t.deliver_now
+    end
   end
 end

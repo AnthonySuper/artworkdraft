@@ -1,12 +1,24 @@
 class UsersController < ApplicationController
 
   before_action :load_user, only: 
-    [:show, :edit, :update, :destroy, :feed]
+    [:show, :edit, :update, :destroy, :feed, :verify_email]
 
   def show
   end
 
   def feed
+  end
+
+  def verify_email
+    token = params[:auth_token]
+    if token != @user.email_confirmation_token
+      redirect_to root_path
+    elsif @user.update(email_confirmed: true)
+      flash[:notice] = "Email confirmed!"
+      redirect_to @user
+    else
+      redirect_to root_path
+    end
   end
 
   def index 
