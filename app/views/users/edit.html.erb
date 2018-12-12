@@ -36,6 +36,29 @@
       </div>
     <% end %>
 
+    <%= f.fields_for :notification_email_prefs,
+        @user.notification_email_prefs do |ff| -%>
+      <h2 class="subtitle">Notification Email Preferences</h2>
+      <div class="field">
+        <%= ff.label :user_followed, class: "checkbox" do %>
+          <%= ff.check_box :user_followed %>
+          New Followers
+        <% end -%>
+      </div>
+      <div class="field">
+        <%= ff.label :user_commented, class: "checkbox" do %>
+          <%= ff.check_box :user_commented %>
+          Comments on your Scraps and Artworks
+        <% end -%>
+      </div>
+      <div class="field">
+        <%= ff.label :user_reblogged, class: "checkbox" do %>
+          <%= ff.check_box :user_reblogged %>
+          Reblogs of your content
+        <% end -%>
+      </div>
+    <% end -%>
+
     <div class="field">
       <%= f.submit class: "button" %>
     </div>

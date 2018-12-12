@@ -68,7 +68,12 @@ class UsersController < ApplicationController
   def user_params
     params
       .require(:user)
-      .permit(:bio, :avatar, prefs: [:nsfw])
+      .permit(:bio, :avatar, prefs: [:nsfw],
+              notification_email_prefs: notification_email_prefs_params)
+  end
+
+  def notification_email_prefs_params
+    [:user_followed, :user_commented, :user_reblogged]
   end
 
   def load_user

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_12_183601) do
+ActiveRecord::Schema.define(version: 2018_12_12_184311) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -144,6 +144,7 @@ ActiveRecord::Schema.define(version: 2018_12_12_183601) do
     t.jsonb "prefs", default: {}, null: false
     t.text "email_confirmation_token"
     t.boolean "email_confirmed", default: false, null: false
+    t.jsonb "notification_email_prefs", default: {"user_followed"=>true, "user_commented"=>true, "user_reblogged"=>true}, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["email_confirmation_token"], name: "index_users_on_email_confirmation_token", unique: true
     t.index ["name"], name: "index_users_on_name", unique: true
