@@ -1,14 +1,14 @@
 <template>
   <div>
     <template v-for="comp in feedItems" v-if="hasItems">
-      <type-splitter v-bind="comp" />
+      <type-splitter v-bind="comp" @fetch-further="fetchFurther" />
     </template>
     <template v-if="hasNothing">
       <h1 class="title">
         No items in feed
       </h1>
       <h2 class="subtitle">
-        Maybe you need to <a href="/users/">follow some users?</a>
+        Either there's nothing here or something went horribly wrong.
       </h2>
     </template>
     <template v-if="isLoading">
@@ -20,6 +20,11 @@
 import TypeSplitter from "./type-splitter.vue"
 import { getJSON } from "../../lib/fetch.js";
 
+function mergeObjects(obj, array) {
+  let o = Object.assign({}, obj);
+  array.forEach(a => o[a.id] = a);
+  return o;
+}
 export default {
   props: {
     baseUrl: {
@@ -28,14 +33,19 @@ export default {
     },
   },
   data: function() {
+    const time = (new Date()).getTime();
     return {
-      feedItems: [],
+      reblogs: {},
+      artworks: {},
+      scraps: {},
+      reblogMinDate: time,
+      artworkMinDate: time,
+      scrapMinDate: time,
       loadingCount: 0,
       fetchedInitial: false,
     };
   },
-  created() {
-    this.fetchData();
+  async created() {
   },
   components: {
     "type-splitter": TypeSplitter
@@ -49,9 +59,41 @@ export default {
     },
     hasNothing: function() {
       return this.fetchedInitial && ! this.hasItems;
-    }
+    },
+    fetcherItems: function() {
+      return [
+        this.makeFetcher(this.artworkMinDate, "artwork"),
+        this.makeFetcher(this.reblogMinDate, "reblog"),
+        this.makeFetcher(this.scrapMinDate, "scrap"),
+      ];
+    },
+    feedItems: function() {
+      let arr = [].concat(this.artworksArray)
+        .concat(this.reblogsArray)
+        .concat(this.scrapsArray)
+        .concat(this.fetcherItems);
+      return arr.sort((a, b) => b.sortDate - a.sortDate);
+    },
+    artworksArray: function() {
+      return Object.values(this.artworks);
+    },
+    reblogsArray: function() {
+      return Object.values(this.reblogs);
+    },
+    scrapsArray: function() {
+      return Object.values(this.scraps);
+    },
   },
   methods: {
+    makeFetcher(created, type) {
+      return {
+        type: "feed-fetcher",
+        sortDate: (new Date(created)),
+        data: {
+          type: type,
+        },
+      };
+    },
     startLoading() {
       this.loadingCount = this.loadingCount + 1;
     },
@@ -61,41 +103,57 @@ export default {
     getBase(string) {
       return getJSON(`${this.baseUrl}/${string}`);
     },
-    fetchData: async function() {
+    afterTime: function(time) {
+      if(! time) {
+        time = new Date();
+      }
+      if(time.getTime) {
+        return time.getTime() / 1000.0;
+      }
+      else return time / 1000.0;
+    },
+    abstractFetch: async function(after, type, url) {
+      console.log("Abstract fetch");
       this.startLoading();
-      let [arts$, scraps$, arbls$] = await Promise.all([
-        this.getBase("artworks"),
-        this.getBase("scraps"),
-        this.getBase("artwork_reblogs"),
-      ]);
-      console.log(arbls$);
-      let arts = arts$.map(a => ({
-        data: a, 
-        type: "artwork", 
-        sortDate: new Date(a.created_at),
-        id: `artwork-${a.id}`
-      }));
-      let scraps = scraps$.map(s => ({
-        data: s,
-        type: "scrap",
-        sortDate: new Date(s.created_at),
-        id: `scrap-${s.id}`
-      }));
-      let arbls = arbls$.map(a => ({
-        data: a,
-        type: "artwork-reblog",
-        sortDate: new Date(a.created_at),
-        id: `artwork-reblog-${a.id}`,
-      }));
-      this.addFeedItems(arts.concat(scraps).concat(arbls));
-      this.endLoading();
-      this.fetchedInitial = true;
+      const time = this.afterTime(after);
+      try {
+        let up = await this.getBase(`${url}?after=${time}`);
+        console.log(up);
+        let process = up.map(a => ({
+          data: a,
+          type: type,
+          sortDate: new Date(a.created_at),
+          id: `${type}-${a.id}`,
+        }));
+        const typeKey = `${type}s`;
+        this[typeKey] = mergeObjects(this[typeKey], process);
+        this[`${type}MinDate`] = Math.min(...this[typeKey]);
+      }
+      finally {
+        this.endLoading();
+      }
     },
-    addFeedItems(comps) {
-      let newItems = [...this.feedItems, ...comps];
-      newItems.sort((a, b) => a.sortDate < b.sortDate);
-      this.feedItems = newItems;
+    getArtworks: async function() {
+      const after = this.artworkMinDate;
+      return await this.abstractFetch(after, "artwork", "artworks");
     },
+    getScraps: async function() {
+      const after = this.scrapMinDate;
+      return await this.abstractFetch(after, "scrap", "scraps");
+    },
+    getReblogs: async function() {
+      const after = this.reblogMinDate;
+      return await this.abstractFetch(after, "reblog", "artwork_reblogs");
+    },
+    fetchFurther: async function(key) {
+      if(key === "artwork") {
+        return await this.getArtworks();
+      } else if(key === "scrap") {
+        return await this.getScraps();
+      } else if(key === "reblog") {
+        return await this.getReblogs();
+      }
+    }
   },
 };
 </script>

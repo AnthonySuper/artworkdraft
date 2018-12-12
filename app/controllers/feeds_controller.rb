@@ -10,7 +10,7 @@ class FeedsController < ApplicationController
   end
 
   def artworks
-    @artworks = feeded(policy_scope(Artwork))
+    @artworks = paginate(feeded(policy_scope(Artwork)))
     respond_to do |format|
       format.json
       format.html do
@@ -24,7 +24,7 @@ class FeedsController < ApplicationController
   end
 
   def scraps
-    @scraps = feeded(policy_scope(Scrap))
+    @scraps = paginate(feeded(policy_scope(Scrap)))
     respond_to do |format|
       format.json
       format.html do
@@ -38,7 +38,7 @@ class FeedsController < ApplicationController
   end
 
   def artwork_reblogs
-    @artwork_reblogs = feeded(policy_scope(ArtworkReblog))
+    @artwork_reblogs = paginate(feeded(policy_scope(ArtworkReblog)));
   end
 
   protected
