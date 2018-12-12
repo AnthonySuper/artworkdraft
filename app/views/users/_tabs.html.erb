@@ -9,5 +9,8 @@
     <li class="<%= action_class :scraps %>">
       <%= link_to "Scraps", scraps_user_path(@user) %>
     </li>
+    <li class="<%= artwork_reblog_class %>">
+      <%= link_to "Reblogs", artwork_reblogs_user_path(@user) %>
+    </li>
   </ul>
 </div>

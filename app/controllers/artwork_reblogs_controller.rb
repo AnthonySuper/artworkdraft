@@ -15,6 +15,8 @@ class ArtworkReblogsController < ApplicationController
   end
 
   def show
+    @user = @artwork_reblog.user
+    @reblog = @artwork_reblog
   end
 
   protected

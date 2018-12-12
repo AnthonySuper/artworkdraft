@@ -1,0 +1,34 @@
+<div class="card">
+  <%= link_to reblog.root_artwork, 
+    class: "card-image centered-image-container" do -%>
+    <%= image_tag reblog.root_artwork.image.variant(resize: "1000x1000>") %>
+  <% end -%>
+  <article class="card-content">
+    <section class="media">
+      <figure class="media-left">
+        <%= link_to reblog.root_artwork.user,
+          class: "image is-64x64" do %>
+          <%= image_tag reblog.root_artwork.user.small_avatar_img %>
+        <% end %>
+      </figure>
+      <div class="media-content">
+        <div class="content">
+          <p class="title">
+          <%= link_to reblog.root_artwork.name, reblog.root_artwork %>
+          </p>
+          <p class="subtitle">
+          By <%= link_to reblog.root_artwork.user.name, 
+            reblog.root_artwork.user %>
+          </p>
+          <p>
+          <%= render_markdown reblog.root_artwork.description %>
+          </p>
+        </div>
+      </div>
+    </section>
+    <%= render partial: "artwork_reblogs/reblog_ancestor",
+      collection: reblog.ordered_ancestors.includes(:user),
+      as: :reblog,
+      cache: true%>
+  </article>
+</div>

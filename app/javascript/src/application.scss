@@ -8,3 +8,19 @@
 .card-spacer {
   margin: 1.5rem 0;
 }
+
+.force-spaced-cards {
+  .card {
+    margin: 1.5rem 0;
+  }
+}
+
+.icon-subtitle {
+  font-weight: normal;
+  display: inline-flex;
+  align-items: center;
+
+  *:not(:last-child) {
+    margin-right: 0.5rem;
+  }
+}

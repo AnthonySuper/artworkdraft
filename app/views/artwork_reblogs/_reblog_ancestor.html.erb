@@ -1,0 +1,24 @@
+<section class="media">
+  <figure class="media-left">
+    <%= link_to reblog.user,
+      class: "image is-64x64" do %>
+      <%= image_tag reblog.user.small_avatar_img %>
+    <% end %> 
+  </figure>
+  <div class="media-content">
+    <div class="content">
+      <p>
+        <span class="icon-subtitle">
+          <%= link_to reblog, class: "icon" do -%>
+            <i class="material-icons">replay</i>
+          <% end %>
+          <strong><%= link_to reblog.user.name, reblog.user %></strong>
+          <small><%= time_tag reblog.created_at %></small>
+        </span>
+      </p>
+      <div>
+        <%= render_markdown reblog.comment %>
+      </div>
+    </div>
+  </div>
+</section>

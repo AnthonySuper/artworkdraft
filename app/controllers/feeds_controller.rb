@@ -39,6 +39,16 @@ class FeedsController < ApplicationController
 
   def artwork_reblogs
     @artwork_reblogs = paginate(feeded(policy_scope(ArtworkReblog)));
+    respond_to do |format|
+      format.json
+      format.html do
+        if is_created?
+          render "users/artwork_reblogs"
+        else
+          head(:not_acceptable)
+        end
+      end
+    end
   end
 
   protected
