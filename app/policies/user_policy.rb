@@ -21,6 +21,10 @@ class UserPolicy < ApplicationPolicy
     show?
   end
 
+  def unsubscribe?
+    true
+  end
+
   def scraps?
     show?
   end

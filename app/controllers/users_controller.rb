@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   before_action :load_user, only: 
-    [:show, :edit, :update, :destroy, :feed, :verify_email]
+    [:show, :edit, :update, :destroy, :feed, :verify_email, :unsubscribe]
 
   def show
   end
@@ -15,6 +15,18 @@ class UsersController < ApplicationController
       redirect_to root_path
     elsif @user.update(email_confirmed: true)
       flash[:notice] = "Email confirmed!"
+      redirect_to @user
+    else
+      redirect_to root_path
+    end
+  end
+
+  def unsubscribe
+    token = params[:unsubscribe_token]
+    if token != @user.unsubscribe_token || token.nil?
+      redirect_to root_path
+    elsif @user.unsubscribe_from_everything!
+      flash[:notice] = "Unsubscribed from all email notifications"
       redirect_to @user
     else
       redirect_to root_path

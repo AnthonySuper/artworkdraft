@@ -81,6 +81,7 @@ class User < ApplicationRecord
 
   # TOKENS
   has_secure_token :email_confirmation_token
+  has_secure_token :unsubscribe_token
 
   # VALIDATIONS
   validates :name, presence: true
@@ -88,6 +89,15 @@ class User < ApplicationRecord
 
   # HOOKS
   after_create :verify_email!
+
+  def unsubscribe_from_everything!
+    attrs = notification_email_prefs.attributes.map do |k, v|
+      [k, false]
+    end
+    regenerate_unsubscribe_token
+    update(notification_email_prefs: Hash[attrs])
+  end
+
 
   def followed_by? user
     users_following.include? user

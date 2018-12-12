@@ -10,8 +10,14 @@
   <body>
     <%= yield %>
     <p class="smalltext">
-    You can stop these emails from your 
-    <%= link_to("settings", edit_user_url(@user)) %>.
+    This is an automated notification message.
+    If you'd like to stop recieving notifications,
+    <%= 
+      link_to("click this",
+              unsubscribe_user_url(@user,
+                                   unsubscribe_token: @user.unsubscribe_token))
+                                 -%>
+
     </p>
   </body>
 </html>

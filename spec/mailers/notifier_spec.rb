@@ -3,7 +3,8 @@ require "rails_helper"
 RSpec.shared_examples "a notification email body" do
   it { is_expected.to match("ArtWorkDraft") }
   it { is_expected.to match(user.name) }
-  it { is_expected.to match(edit_user_url(user)) }
+  it { is_expected.to match(unsubscribe_user_url(user)) }
+  it { is_expected.to match(user.unsubscribe_token) }
 end
 
 # Note: these specs kinda test some functionality of notifiers.

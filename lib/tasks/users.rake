@@ -8,4 +8,10 @@ namespace :users do
       user.verify_email!(false)
     end
   end
+
+  task generate_unsubscribe: :environment do
+    User.where(unsubscribe_token: nil).each do |user|
+      user.regenerate_unsubscribe_token
+    end
+  end
 end
