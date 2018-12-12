@@ -20,10 +20,13 @@ class User < ApplicationRecord
   has_many :follower_fallowings,
     class_name: "Following",
     foreign_key: :follower_id
+
   has_many :users_followed,
     through: :follower_fallowings,
     class_name: "User",
     source: :followee 
+
+  has_many :notifications
 
   # ATTACHMENTS
   has_one_attached :avatar

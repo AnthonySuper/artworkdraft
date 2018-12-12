@@ -13,6 +13,7 @@ RSpec.describe User, type: :model do
     it { is_expected.to have_many(:artworks) }
     it { is_expected.to have_many(:users_followed) }
     it { is_expected.to have_many(:users_following) }
+    it { is_expected.to have_many(:notifications) }
   end
 
   describe "following methods" do

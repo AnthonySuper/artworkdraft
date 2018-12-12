@@ -1,0 +1,11 @@
+<h1>You've got a new follower on ArtWorkDraft!</h1>
+<p>
+Hey <%= @user.name %>,
+</p>
+<p>
+<%= link_to @data[:follower_name], user_url(@data[:follower_id]) %> just followed you on ArtWorkDraft!
+</p>
+<p class="smalltext">
+You can stop these emails from your 
+<%= link_to("settings", edit_user_url(@user)) %>.
+</p>

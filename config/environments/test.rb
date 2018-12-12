@@ -43,6 +43,8 @@ Rails.application.configure do
     port: 3000
   }
 
+  config.active_job.queue_adapter = :test
+
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
 
