@@ -72,7 +72,7 @@ export default {
         return this.appearReason;
       }
       else {
-        return `Following ${this.userName}`;
+        return `Created By ${this.userName}`;
       }
     },
   },
@@ -87,10 +87,6 @@ export default {
 </script>
 
 <style>
-.card-spacer {
-  margin: 1.5rem 0;
-}
-
 .card-footer .material-icons {
   line-height: unset;
 }

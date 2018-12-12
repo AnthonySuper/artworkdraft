@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  include Paginated
+
   has_secure_password
 
   has_many :scraps

@@ -1,5 +1,6 @@
 class ArtworkReblog < ApplicationRecord
   include Feeded
+  include Paginated
 
   belongs_to :user
   belongs_to :artwork, required: false

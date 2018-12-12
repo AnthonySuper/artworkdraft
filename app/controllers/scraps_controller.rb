@@ -4,9 +4,11 @@ class ScrapsController < ApplicationController
 
 
   def index
-    @scraps = policy_scope(Scrap)
+    scraps = policy_scope(Scrap)
       .includes(image_attachment: :blob)
       .search(params[:search])
+    @scraps = paginate(scraps)
+    authorize @scraps
   end
 
   def new
