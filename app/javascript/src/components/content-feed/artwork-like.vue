@@ -72,7 +72,7 @@ export default {
         return this.appearReason;
       }
       else {
-        return `Following ${this.userName}`;
+        return `Created By ${this.userName}`;
       }
     },
   },
