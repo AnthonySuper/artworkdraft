@@ -35,10 +35,18 @@ Rails.application.routes.draw do
   resources :artwork_reblogs
 
   scope "feeds" do
-    root to: "feeds#index"
+    get "/", to: "feeds#index"
     get "artworks", to: "feeds#artworks"
     get "scraps", to: "feeds#scraps"
     get "artwork_reblogs", to: "feeds#artwork_reblogs"
+  end
+
+  scope "sitemaps", defaults: { format: "txt" } do
+    get "tags", to: "sitemaps#tags"
+    get "users", to: "sitemaps#users"
+    get "scraps", to: "sitemaps#scraps"
+    get "artworks", to: "sitemaps#artworks"
+    get "/", to: "sitemaps#index"
   end
 
   root to: "home#index"
