@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_12_173951) do
+ActiveRecord::Schema.define(version: 2018_12_12_222715) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -90,6 +90,15 @@ ActiveRecord::Schema.define(version: 2018_12_12_173951) do
     t.index ["follower_id"], name: "index_followings_on_follower_id"
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.boolean "read", default: false, null: false
+    t.jsonb "payload", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_notifications_on_user_id"
+  end
+
   create_table "scrap_comments", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.text "body", null: false
@@ -135,9 +144,12 @@ ActiveRecord::Schema.define(version: 2018_12_12_173951) do
     t.jsonb "prefs", default: {}, null: false
     t.text "email_confirmation_token"
     t.boolean "email_confirmed", default: false, null: false
+    t.jsonb "notification_email_prefs", default: {"user_followed"=>true, "user_commented"=>true, "user_reblogged"=>true}, null: false
+    t.text "unsubscribe_token"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["email_confirmation_token"], name: "index_users_on_email_confirmation_token", unique: true
     t.index ["name"], name: "index_users_on_name", unique: true
+    t.index ["unsubscribe_token"], name: "index_users_on_unsubscribe_token", unique: true
   end
 
   add_foreign_key "artwork_comments", "artworks", on_delete: :cascade
@@ -149,6 +161,7 @@ ActiveRecord::Schema.define(version: 2018_12_12_173951) do
   add_foreign_key "artworks", "users"
   add_foreign_key "followings", "users", column: "followee_id", on_delete: :cascade
   add_foreign_key "followings", "users", column: "follower_id", on_delete: :cascade
+  add_foreign_key "notifications", "users", on_delete: :cascade
   add_foreign_key "scrap_comments", "scraps", on_delete: :cascade
   add_foreign_key "scrap_comments", "users", on_delete: :cascade
   add_foreign_key "scrap_tags", "scraps", on_delete: :cascade
