@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_12_173951) do
+ActiveRecord::Schema.define(version: 2018_12_12_183601) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
@@ -90,6 +90,15 @@ ActiveRecord::Schema.define(version: 2018_12_12_173951) do
     t.index ["follower_id"], name: "index_followings_on_follower_id"
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.boolean "read", default: false, null: false
+    t.jsonb "payload", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_notifications_on_user_id"
+  end
+
   create_table "scrap_comments", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.text "body", null: false
@@ -149,6 +158,7 @@ ActiveRecord::Schema.define(version: 2018_12_12_173951) do
   add_foreign_key "artworks", "users"
   add_foreign_key "followings", "users", column: "followee_id", on_delete: :cascade
   add_foreign_key "followings", "users", column: "follower_id", on_delete: :cascade
+  add_foreign_key "notifications", "users", on_delete: :cascade
   add_foreign_key "scrap_comments", "scraps", on_delete: :cascade
   add_foreign_key "scrap_comments", "users", on_delete: :cascade
   add_foreign_key "scrap_tags", "scraps", on_delete: :cascade
