@@ -5,7 +5,4 @@ Hey <%= @user.name %>,
 <p>
 <%= link_to @data[:follower_name], user_url(@data[:follower_id]) %> just followed you on ArtWorkDraft!
 </p>
-<p class="smalltext">
-You can stop these emails from your 
-<%= link_to("settings", edit_user_url(@user)) %>.
-</p>
+

@@ -10,6 +10,7 @@ class ArtworkReblog < ApplicationRecord
   attr_accessor :ancestor_id
 
   before_validation :create_path
+  after_create :notify_users
   
   # SCOPES
   def self.for_artworks artworks
@@ -54,5 +55,9 @@ class ArtworkReblog < ApplicationRecord
     else
       self.path = ArtworkReblog.find(ancestor_id).next_path
     end
+  end
+
+  def notify_users
+    ReblogNotifier.new(self).notify!
   end
 end
