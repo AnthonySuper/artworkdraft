@@ -9,10 +9,11 @@ class SessionsController < ApplicationController
     if @user.nil? then 
       redirect_to new_session_path
     elsif @user.email_confirmed?
+      flash[:notice] = "Signed in"
       session[:user_id] = @user.id
       redirect_back(fallback_location: "/")
     else
-      flash[:notice] = "Email not confirmed. Please check your email."
+      flash[:alert] = "Email not confirmed. Please check your email."
       redirect_back(fallback_location: "/")
     end
   end
