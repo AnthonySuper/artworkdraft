@@ -5,62 +5,64 @@
 <% og_tag :image_alt, @artwork.description %>
 <div itemscope itemtype="https://schema.org/VisualArtwork">
   <div class="section">
-    <div class="card">
-      <%= link_to url_for(@artwork.image),
-        itemprop: "image",
-        class: "card-image centered-image-container" do %>
-        <%= image_tag @artwork.image.variant(resize: "1000x1000>"), 
-          itemprop: "thumbnailUrl" %>
-      <% end -%>
-      <div class="card-content">
-        <article class="media">
-          <figure class="media-left">
-            <%= link_to @artwork.user, 
-              class: "image is-64x64", rel: "author" do %>
-              <%= image_tag @artwork.user.small_avatar_img %>
-            <% end %>
-          </figure>
-          <div class="media-content">
-            <div class="content">
-              <p class="title">
-                <span itemprop="headline">
-                  <%= @artwork.name %>
-                </span>
-                <% if policy(ArtworkReblog.new(artwork: @artwork)).create? %>
-                  <div data-vue-component="artwork-reblogs/reblog-button"
-                       data-artwork-id="<%= @artwork.id %>">
-                  </div>
-                <% end %>
-                <% if policy(@artwork).edit? %>
-                  <%= link_to edit_artwork_path(@artwork) do %>
-                    <i class="material-icons">edit</i>
+    <div class="container">
+      <div class="card">
+        <%= link_to url_for(@artwork.image),
+          itemprop: "image",
+          class: "card-image centered-image-container" do %>
+          <%= image_tag @artwork.image.variant(resize: "1000x1000>"), 
+            itemprop: "thumbnailUrl" %>
+        <% end -%>
+        <div class="card-content">
+          <article class="media">
+            <figure class="media-left">
+              <%= link_to @artwork.user, 
+                class: "image is-64x64", rel: "author" do %>
+                <%= image_tag @artwork.user.small_avatar_img %>
+              <% end %>
+            </figure>
+            <div class="media-content">
+              <div class="content">
+                <p class="title">
+                  <span itemprop="headline">
+                    <%= @artwork.name %>
+                  </span>
+                  <% if policy(ArtworkReblog.new(artwork: @artwork)).create? %>
+                    <div data-vue-component="artwork-reblogs/reblog-button"
+                         data-artwork-id="<%= @artwork.id %>">
+                    </div>
                   <% end %>
-                <% end %>
-                <% if policy(@artwork).destroy? %>
-                  <%= link_to artwork_path(@artwork),
-                    method: :delete,
-                    data: { confirm: "Are you certain?" } do %>
-                    <i class="material-icons">delete_forever</i>
+                  <% if policy(@artwork).edit? %>
+                    <%= link_to edit_artwork_path(@artwork) do %>
+                      <i class="material-icons">edit</i>
+                    <% end %>
                   <% end %>
-                <% end %>
-              </p>
-              <p class="subtitle">
-                By
-                <%= link_to @artwork.user.name, @artwork.user, 
-                  rel: "author", itemprop: "author" %>
-              </p>
-              <%= render "tags/tag_list",
-                tags: @artwork.tags %>
-              <meta itemprop="description"
-                    content="<%= @artwork.description %>" />
-              <p>
-                <%= render_markdown @artwork.description %>
-              </p>
-              <hr />
-              <%= time_tag @artwork.created_at, itemprop: "dateCreated" %>
+                  <% if policy(@artwork).destroy? %>
+                    <%= link_to artwork_path(@artwork),
+                      method: :delete,
+                      data: { confirm: "Are you certain?" } do %>
+                      <i class="material-icons">delete_forever</i>
+                    <% end %>
+                  <% end %>
+                </p>
+                <p class="subtitle">
+                  By
+                  <%= link_to @artwork.user.name, @artwork.user, 
+                    rel: "author", itemprop: "author" %>
+                </p>
+                <%= render "tags/tag_list",
+                  tags: @artwork.tags %>
+                <meta itemprop="description"
+                      content="<%= @artwork.description %>" />
+                <p>
+                  <%= render_markdown @artwork.description %>
+                </p>
+                <hr />
+                <%= time_tag @artwork.created_at, itemprop: "dateCreated" %>
+              </div>
             </div>
-          </div>
-        </article>
+          </article>
+        </div>
       </div>
     </div>
   </div>
