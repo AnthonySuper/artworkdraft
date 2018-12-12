@@ -3,11 +3,12 @@ class ArtworksController < ApplicationController
     only: [:show, :update, :edit, :destroy]
 
   def index
-    @artworks = policy_scope(Artwork)
+    artworks = policy_scope(Artwork)
       .includes(user: {avatar_attachment: :blob})
       .with_attached_image
       .order(created_at: :desc)
       .search(params[:search])
+    @artworks = paginate(artworks)
     authorize @artworks
   end
 

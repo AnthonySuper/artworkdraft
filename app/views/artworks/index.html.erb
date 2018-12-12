@@ -1,19 +1,25 @@
 <%= page_title "Artworks" %>
 
 <div class="section">
-  <%= form_tag artworks_path, method: :get, class: "form" do %>
+  <div class="container">
+    <h1 class="title">Artworks</h1>
+    <%= form_tag artworks_path, method: :get, class: "form" do %>
 
-    <div class="field">
-      <label for="search[tags]" class="label">Tags</label>
-      <div data-vue-component="tags/new-tags-form"
-           data-field-name="search[tags]">
+      <div class="field">
+        <label for="search[tags]" class="label">Tags</label>
+        <div data-vue-component="tags/new-tags-form"
+             data-field-name="search[tags]">
+        </div>
       </div>
-    </div>
-    <%= submit_tag "Search", class: "button" %>
-  <% end %>
+      <%= submit_tag "Search", class: "button" %>
+    <% end %>
+  </div>
 </div>
+
 <div class="section">
   <div class="container">
     <%= render @artworks, cached: true %>
+
+    <%= render "page_level", collection: @artworks %>
   </div>
 </div>

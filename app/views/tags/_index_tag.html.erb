@@ -1,12 +1,14 @@
-<div class="card">
-  <div class="card-header">
-    <%= link_to tag, class: "card-header-title" do %>
-      <%= tag.name %>
-    <% end -%>
-  </div>
-  <div class="card-content">
-    <div class="content">
-      <%= render_markdown tag.description %>
+<div class="card-spacer">
+  <div class="card">
+    <div class="card-header">
+      <%= link_to tag, class: "card-header-title" do %>
+        <%= tag.name %>
+      <% end -%>
+    </div>
+    <div class="card-content">
+      <div class="content">
+        <%= render_markdown tag.description %>
+      </div>
     </div>
   </div>
 </div>

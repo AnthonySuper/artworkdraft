@@ -1,6 +1,14 @@
 module ApplicationHelper
 
-  def page_title(title)
+  def next_page collection
+    np = params.permit(:per_page,
+                       prefs: {},
+                       search: {})
+    min = collection.to_a.map(&:created_at).min.to_f
+    url_for(np.merge(page_after: min))
+  end
+
+  def page_title title
     provide(:title) { title }
   end
 
@@ -12,7 +20,7 @@ module ApplicationHelper
     end
   end
 
-  def meta_tag(tag, text)
+  def meta_tag tag, text
     provide :"meta_#{tag}", text
   end
 

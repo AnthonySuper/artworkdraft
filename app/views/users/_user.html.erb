@@ -1,14 +1,16 @@
 
-<div class="card">
-  <header class="card-header">
-    <%= link_to user, class: "card-header-title" do -%>
-      <%= user.name %>
-    <% end -%>
-  </header>
+<div class="card-spacer">
+  <div class="card">
+    <header class="card-header">
+      <%= link_to user, class: "card-header-title" do -%>
+        <%= user.name %>
+      <% end -%>
+    </header>
 
-  <div class="card-content">
-    <p>
-      <%= user.bio %>
-    </p>
+    <div class="card-content">
+      <p>
+        <%= user.bio %>
+      </p>
+    </div>
   </div>
 </div>
