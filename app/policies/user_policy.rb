@@ -37,6 +37,10 @@ class UserPolicy < ApplicationPolicy
     same_user?
   end
 
+  def verify_email?
+    true
+  end
+
   def update?
     same_user?
   end

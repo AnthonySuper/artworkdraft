@@ -1,0 +1,12 @@
+<% if flash.alert -%>
+  <div class="notification is-danger is-button-notification">
+    <button class="delete"></button>
+    <%= flash.alert %>
+  </div>
+<% end -%>
+<% if flash.notice -%>
+  <div class="notification is-primary is-button-notification">
+    <button class="delete"></button>
+    <%= flash.notice %>
+  </div>
+<% end -%>
