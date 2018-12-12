@@ -11,7 +11,8 @@ class ReblogNotifier < ApplicationNotifier
     {
       artwork_id: @reblog.root_artwork.id,
       reblogger_id: @reblog.user.id,
-      reblogger_name: @reblog.user.name
+      reblogger_name: @reblog.user.name,
+      reblog_id: @reblog.id
     }
   end
 
