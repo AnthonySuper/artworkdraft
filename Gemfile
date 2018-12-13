@@ -17,6 +17,8 @@ gem 'uglifier', '>= 1.3.0'
 # gem 'mini_racer', platforms: :ruby
 gem "aws-sdk-s3", require: false
 
+gem 'aws-sdk-rails'
+
 gem 'webpacker'
 
 # make sprockets happy even though we don't use this
