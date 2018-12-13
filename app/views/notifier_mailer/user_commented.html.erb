@@ -1,0 +1,8 @@
+<p>
+Hey <%= @user.name %>,
+</p>
+<p>
+<%= link_to @data[:commenter_name], user_url(@data[:commenter_id]) %> 
+just commented on your 
+<%= link_to(@data[:commented_type], comment_link(@data)) %> on ArtWorkDraft.
+</p>

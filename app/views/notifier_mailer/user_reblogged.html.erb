@@ -1,0 +1,9 @@
+<p>
+Hey <%= @user.name %>,
+</p>
+<p>
+<%= link_to @data[:reblogger_name], user_url(@data[:reblogger_id]) %>
+just 
+<%= link_to "reblogged", artwork_reblog_url(@data[:reblog_id]) %>
+a post of yours on ArtWorkDraft!
+</p>

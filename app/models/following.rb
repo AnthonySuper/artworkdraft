@@ -6,4 +6,10 @@ class Following < ApplicationRecord
     uniqueness: { scope: :follower_id } 
   validates :follower, presence: true,
     uniqueness: { scope: :followee_id }
+
+  after_create :send_notifications!
+
+  def send_notifications!
+    FollowingCreatedNotifier.new(self).notify!
+  end
 end

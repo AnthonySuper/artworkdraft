@@ -21,6 +21,10 @@ class UserPolicy < ApplicationPolicy
     show?
   end
 
+  def unsubscribe?
+    true
+  end
+
   def scraps?
     show?
   end
@@ -35,6 +39,10 @@ class UserPolicy < ApplicationPolicy
 
   def destroy?
     same_user?
+  end
+
+  def verify_email?
+    true
   end
 
   def update?

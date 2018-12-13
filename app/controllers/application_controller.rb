@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
     c = if params["page_after"]
       collection.page_after(to_time(params["page_after"]))
     else
-      collection
+      collection.paginate_order
     end
     c.limit(per_page)
   end

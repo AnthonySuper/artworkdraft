@@ -1,0 +1,10 @@
+<%= render "users/bio_section" %>
+
+<div class="section">
+  <div class="container force-spaced-cards">
+    <%= render "users/tabs" %>
+    <%= render partial: "artwork_reblogs/reblog_card",
+    collection: @artwork_reblogs,
+    as: :reblog %>
+  </div>
+</div>

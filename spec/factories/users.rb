@@ -10,5 +10,8 @@ FactoryBot.define do
 
     password { "password" }
     password_confirmation { "password" }
+    notification_email_prefs do
+      { user_followed: true, user_commented: true, user_reblogged: true }
+    end
   end
 end

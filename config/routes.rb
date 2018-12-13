@@ -6,6 +6,8 @@ Rails.application.routes.draw do
       get "artworks", to: "feeds#artworks", feed_type: :created
       get "artwork_reblogs", to: "feeds#artwork_reblogs", feed_type: :created
       get "scraps", to: "feeds#scraps", feed_type: :created
+      get "verify_email"
+      get "unsubscribe"
     end
   end
 

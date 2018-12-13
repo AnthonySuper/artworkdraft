@@ -26,7 +26,7 @@ RSpec.describe ArtworkReblog, type: :model do
 
     context "when creating for a reblog" do
       let(:reblog) { create(:artwork_reblog) }
-      
+
       it "allows the creation of multiple at once" do
         create(:artwork_reblog, ancestor_id: reblog.id)
         expect {
@@ -56,6 +56,43 @@ RSpec.describe ArtworkReblog, type: :model do
       it "works with the second" do
         before = ArtworkReblog.page_before(second.created_at)
         expect(before).to contain_exactly(third)
+      end
+    end
+  end
+
+  describe "notifications" do
+    let(:artwork) { create(:artwork, user: artist) }
+
+    context "with one layer of reblog" do
+      before(:each) { artist; reblogger; artwork; }
+      let(:reblogger) { create(:user) }
+
+      subject do
+        proc do
+          create(:artwork_reblog, user: reblogger, artwork: artwork) 
+        end
+      end
+
+      context "with an artist who is notified" do
+        let(:artist) do
+          create(:user, notification_email_prefs: { user_reblogged: true })
+        end
+
+        it { is_expected.to change{Notification.count}.by(1) }
+        it { is_expected.to change{artist.notifications.reload.count}.by(1) }
+        it { is_expected.to_not change{reblogger.notifications.reload.count} }
+        it { is_expected.to have_enqueued_job.exactly(1).times }
+      end
+
+      context "with an artist who is not notified" do
+        let(:artist) do
+          create(:user, notification_email_prefs: { user_reblogged: false })
+        end
+
+        it { is_expected.to change{Notification.count}.by(1) }
+        it { is_expected.to change{artist.notifications.reload.count}.by(1) }
+        it { is_expected.to_not change{reblogger.notifications.reload.count} }
+        it { is_expected.to_not have_enqueued_job }
       end
     end
   end

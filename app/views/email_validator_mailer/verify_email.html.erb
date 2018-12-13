@@ -1,0 +1,18 @@
+<h1>Welcome, <%= @user.name %></h1>
+
+<p>
+Thanks for signing up for <%= link_to("ArtWorkDraft", root_url) %>.
+You're almost done: all we need to do is verify your email.
+To do that, please visit 
+<%= link_to("this url",
+            verify_email_user_url(@user, 
+                                  auth_token: @user.email_confirmation_token)) %>
+If that link doesn't work, copy
+<%= verify_email_user_url(@user,
+                          auth_token: @user.email_confirmation_token) %> into
+your browser.
+
+</p>
+<p>
+We really hope you enjoy the site! 
+</p>
