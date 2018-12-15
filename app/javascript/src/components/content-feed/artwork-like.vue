@@ -16,7 +16,7 @@
               <img v-bind:src="userAvatar" />
             </a>
           </div>
-          <div class="media-right">
+          <div class="media-content">
             <h2 class="title">
               {{name}}
             </h2>
