@@ -64,7 +64,7 @@ export default {
         case "USER_FOLLOWED":
           return `/users/${pl.data.follower_id}`;
         case "USER_COMMENTED":
-          return `/${pl.data.commented_type}/${pl.data.commented_id}`;
+          return `/${pl.data.commented_type}s/${pl.data.commented_id}`;
         default:
           return "/";
       };
