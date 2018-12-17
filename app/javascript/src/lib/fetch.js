@@ -4,7 +4,7 @@ export function getCSRF() {
   else return "";
 }
 
-export function postJSON(endpoint, json) {
+export function csrfFetch(method, endpoint, json) {
   return fetch(endpoint, {
     headers: {
       "Accept": "application/json",
@@ -12,9 +12,14 @@ export function postJSON(endpoint, json) {
       "X-CSRF-Token": getCSRF(),
     },
     body: JSON.stringify(json),
-    method: "POST",
-  });
+    method: method,
+  }).then(a => a.json());
 };
+
+export let postJSON = csrfFetch.bind(null, "POST");
+
+export let putJSON = csrfFetch.bind(null, "PUT");
+
 
 export async function getJSON(endpoint) {
   let r = await fetch(endpoint, {
