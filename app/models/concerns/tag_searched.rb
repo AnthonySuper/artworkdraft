@@ -8,6 +8,8 @@ module TagSearched
       tag_ids = tag_ids.pluck(:id) if tag_ids.is_a? ActiveRecord::Relation
       self.joins(:tags)
         .where(tags: {id: tag_ids})
+        .group(:id)
+        .having("COUNT(*) = ?", tag_ids.length)
     end
   end
 end

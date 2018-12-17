@@ -30,4 +30,6 @@ RSpec.describe Scrap, type: :model do
       end
     end
   end
+
+  it_behaves_like "it is tag searched", :scrap, Scrap
 end
