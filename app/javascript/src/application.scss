@@ -24,3 +24,23 @@
     margin-right: 0.5rem;
   }
 }
+
+.notification-icon {
+  position: relative;
+
+  &:after {
+    font-size: 0.7em;
+    font-weight: 700;
+    position: absolute;
+    padding: 5px 8px;
+    top: -10px;
+    right: -10px;
+    border: 3px #fff solid;
+    border-radius: 60px;
+    content: attr(data-notification-count);
+    font-family: sans-serif;
+    background-color: #000;
+    transform: scale(0.5);
+    color: #fff;
+  }
+}
