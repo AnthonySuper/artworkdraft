@@ -54,7 +54,12 @@ export default {
       }
     },
     updateNotification(id, notification) {
-      this.$set(this.notificationMap, id, notification);
+      if(notification) {
+        this.$set(this.notificationMap, id, notification);
+      }
+      else {
+        this.$delete(this.notificationMap, id);
+      }
     },
     async getNotifications() {
       const notes = await getJSON("/notifications");

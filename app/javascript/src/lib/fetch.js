@@ -20,6 +20,8 @@ export let postJSON = csrfFetch.bind(null, "POST");
 
 export let putJSON = csrfFetch.bind(null, "PUT");
 
+export let deleteJSON = csrfFetch.bind(null, "DELETE");
+
 
 export async function getJSON(endpoint) {
   let r = await fetch(endpoint, {

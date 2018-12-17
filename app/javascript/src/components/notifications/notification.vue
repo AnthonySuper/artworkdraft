@@ -23,7 +23,7 @@
 </template>
 <script>
 
-import { putJSON } from "../../lib/fetch.js";
+import { putJSON, deleteJSON } from "../../lib/fetch.js";
 
 export default {
   props: {
@@ -78,6 +78,8 @@ export default {
       this.$emit("notification-changed", this.id, note);
     },
     async deleteNotification() {
+      await deleteJSON(`/notifications/${this.id}`, {});
+      this.$emit("notification-changed", this.id, null);
     },
   }
 };

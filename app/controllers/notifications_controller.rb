@@ -11,6 +11,16 @@ class NotificationsController < ApplicationController
     authorize @notifications
   end
 
+  def destroy
+    respond_to do |format|
+      if @notification.destroy
+        format.json { render json: {status: "ok"} }
+      else
+        format.json { render json: {status: "failed"}, status: 409 }
+      end
+    end
+  end
+
   def update
     respond_to do |format|
       if @notification.update(notification_params)
