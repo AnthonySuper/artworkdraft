@@ -1,6 +1,16 @@
 class NotificationsController < ApplicationController
   before_action :load_notification, only: [:show, :update, :destroy]
 
+  def index
+    @notifications = policy_scope(Notification).paginate_order
+    authorize @notifications
+  end
+
+  def unread
+    @notifications = policy_scope(Notification).unread.paginate_order
+    authorize @notifications
+  end
+
   def update
     respond_to do |format|
       if @notification.update(notification_params)

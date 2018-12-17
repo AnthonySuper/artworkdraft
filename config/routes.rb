@@ -36,7 +36,9 @@ Rails.application.routes.draw do
 
   resources :artwork_reblogs
 
-  resources :notifications
+  resources :notifications, only: [:index, :show, :update, :destroy] do
+    get "unread", on: :collection
+  end
 
   scope "feeds" do
     get "/", to: "feeds#index"
