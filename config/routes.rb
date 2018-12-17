@@ -36,6 +36,8 @@ Rails.application.routes.draw do
 
   resources :artwork_reblogs
 
+  resources :notifications
+
   scope "feeds" do
     get "/", to: "feeds#index"
     get "artworks", to: "feeds#artworks"

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe NotificationsPolicy do
+RSpec.describe NotificationPolicy do
   let(:notification) { create(:notification) }
   subject { described_class.new(UserContext.new(user, {}), notification) }
   let(:actions) {%i[show update index destroy] }
