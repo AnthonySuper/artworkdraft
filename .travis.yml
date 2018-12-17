@@ -13,8 +13,12 @@ addons:
 env:
   global:
   - PGPORT=5433
+  - CC_TEST_REPORTER_ID=a7875a70b377f3fb4fd8c11c1d18677fa3e41beb1292c3cd821ebe3fb8914994
 before_script:
   - cp config/database.yml.travis config/database.yml
+  - curl -L ttps://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
 services:
   - postgresql
 script:
@@ -23,3 +27,5 @@ script:
   - RAILS_ENV=test bundle exec rails assets:precompile
   - RAILS_ENV=test bundle exec rspec
   - RAILS_ENV=test yarn test 
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
