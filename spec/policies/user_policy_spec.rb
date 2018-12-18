@@ -5,6 +5,7 @@ RSpec.describe UserPolicy do
 
   subject { described_class.new(UserContext.new(user, {}), duser) }
 
+  let(:view_actions) { %i[index show feed artworks scraps artwork_reblogs] }
   context "being a visitor" do
     let(:user) { nil }
 
@@ -15,13 +16,14 @@ RSpec.describe UserPolicy do
 
   context "being another user" do
     let(:user) { create(:user) }
-    it { is_expected.to permit_action(:show) }
+    it { is_expected.to permit_actions(view_actions) }
     it { is_expected.to forbid_actions(%i[create update destroy]) }
   end
 
   context "being the same user" do
     let(:user) { duser }
-    it { is_expected.to permit_actions(%i[show update destroy]) }
-    it { is_expected.to forbid_action(:create) }
+    it { is_expected.to permit_actions(%i[show edit update destroy]) }
+    it { is_expected.to permit_actions(view_actions) }
+    it { is_expected.to forbid_actions(%i[new create]) }
   end
 end

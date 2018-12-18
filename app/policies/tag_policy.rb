@@ -9,7 +9,7 @@ class TagPolicy < ApplicationPolicy
     logged_in?
   end
 
-  def edit?
+  def update?
     logged_in?
   end
 

@@ -96,4 +96,28 @@ RSpec.describe ArtworkReblog, type: :model do
       end
     end
   end
+
+  describe "made_by" do
+    let(:reblog_1) { create(:artwork_reblog) }
+    let(:reblog_2) { create(:artwork_reblog) }
+    before(:each) { reblog_1; reblog_2 }
+
+    subject { described_class.made_by(reblog_1.user) }
+
+    it { is_expected.to include(reblog_1) }
+    it { is_expected.to_not include(reblog_2) }
+  end
+
+  describe "for_artworks" do
+    let(:artwork) { create(:artwork) }
+    let(:r_1) { create(:artwork_reblog, artwork: artwork) }
+    let(:r_2) { create(:artwork_reblog, ancestor_id: r_1.id, artwork: nil) }
+    let(:r_3) { create(:artwork_reblog) }
+    before(:each) { r_1; r_2; r_3 }
+    subject { described_class.for_artworks [artwork] }
+
+    it { is_expected.to include(r_1) }
+    it { is_expected.to include(r_2) }
+    it { is_expected.to_not include(r_3) }
+  end
 end
