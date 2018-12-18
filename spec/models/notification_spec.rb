@@ -9,4 +9,17 @@ RSpec.describe Notification, type: :model do
     it { is_expected.to validate_presence_of(:user) }
     it { is_expected.to validate_presence_of(:payload) }
   end
+
+  describe "scopes" do
+    describe "unread" do
+      let(:read) { create(:notification, read: true) }
+      let(:unread) { create(:notification, read: false) }
+      before(:each) { read; unread; }
+
+      subject { described_class.unread }
+
+      it { is_expected.to include(unread) }
+      it { is_expected.to_not include(read) }
+    end
+  end
 end

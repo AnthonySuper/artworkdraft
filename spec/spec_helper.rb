@@ -14,6 +14,8 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 #
+require "simplecov"
+SimpleCov.start
 require "pundit/rspec"
 require "capybara/rspec"
 Dir[File.dirname(__FILE__) + "/support/**/*.rb"].each{|f| require f}
