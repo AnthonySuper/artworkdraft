@@ -55,6 +55,10 @@ Rails.application.routes.draw do
     get "/", to: "sitemaps#index"
   end
 
+  get "faq", to: "info_pages#faq"
+  get "rules", to: "info_pages#rules"
+  get "legal", to: "info_pages#legal"
+
   root to: "home#index"
 
 end
