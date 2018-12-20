@@ -1,13 +1,14 @@
 <%= render 'users/bio_section' %>
 <%= page_title "#{@user.name} | Artworks" %>
-
 <section class="section">
   <div class="container">
     <%= render "users/tabs" %>
-    <%= render partial: "users/artwork",
-        collection: policy_scope(@user.artworks),
-        as: :artwork,
-        cache: true %>
+    <div class="columns is-multiline">
+      <%= render partial: "users/artwork",
+          collection: policy_scope(@user.artworks),
+          as: :artwork,
+          cache: true %>
+    </div>
   </div>
 </section>
 
