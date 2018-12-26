@@ -12,5 +12,13 @@
     <li class="<%= artwork_reblog_class %>">
       <%= link_to "Reblogs", artwork_reblogs_user_path(@user) %>
     </li>
+    <li class="<%= action_class :followers %>">
+      <%= link_to "Followers", followers_user_path(@user) %>
+    </li>
+    <% if policy(@user).mutuals? %>
+      <li class="<%= action_class :mutuals %>">
+        <%= link_to "Mutuals", mutuals_user_path(@user) %>
+      </li>
+    <% end %>
   </ul>
 </div>

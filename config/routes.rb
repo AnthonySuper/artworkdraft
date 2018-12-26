@@ -8,6 +8,8 @@ Rails.application.routes.draw do
       get "scraps", to: "feeds#scraps", feed_type: :created
       get "verify_email"
       get "unsubscribe"
+      get "followers"
+      get "mutuals"
     end
   end
 
