@@ -1,0 +1,9 @@
+<%= render 'bio_section' %>
+<%= page_title "#{@user.name}'s followers" %>
+
+<section class="section">
+  <div class="container">
+    <%= render 'tabs' %>
+    <%= render @user.users_following %>
+  </div>
+</section>

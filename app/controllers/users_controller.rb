@@ -1,12 +1,20 @@
 class UsersController < ApplicationController
 
   before_action :load_user, only: 
-    [:show, :edit, :update, :destroy, :feed, :verify_email, :unsubscribe]
+    [:show, :edit, :update, :destroy, 
+     :feed, :verify_email, :unsubscribe,
+     :mutuals, :followers]
 
   def show
   end
 
   def feed
+  end
+
+  def mutuals
+  end
+
+  def followers
   end
 
   def verify_email
