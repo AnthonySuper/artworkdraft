@@ -1,7 +1,8 @@
 <% page_title "\"#{@artwork.name}\" by #{@artwork.user.name}" %>
 <% meta_tag :description, @artwork.description %>
 <% meta_tag :keywords, tags_to_keywords(@artwork.tags) %>
-<% og_tag :image, url_for(@artwork.image.variant(resize: "1000x1000>")) %>
+<% og_tag :image, 
+  polymorphic_url(@artwork.image.variant(resize: "1000x1000>")) %>
 <% og_tag :image_alt, @artwork.description %>
 <div itemscope itemtype="https://schema.org/VisualArtwork">
   <div class="section">
