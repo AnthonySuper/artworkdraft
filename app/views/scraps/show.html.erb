@@ -2,7 +2,7 @@
 <% meta_tag :description, @scrap.description %>
 <% meta_tag :keywords, tags_to_keywords(@scrap.tags) %>
 <% og_tag(:image, 
-  url_for(@scrap.image.variant(resize: "1000x1000>"))) %>
+  polymorphic_url(@scrap.image.variant(resize: "1000x1000>"))) %>
 <% og_tag :image_alt, @scrap.description %>
 <div itemscope itemtype="https://schema.org/VisualArtwork">   
   <div class="section">
