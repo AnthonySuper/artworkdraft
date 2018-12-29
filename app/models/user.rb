@@ -9,20 +9,20 @@ class User < ApplicationRecord
 
   has_many :artworks
 
-  has_many :followee_fallowings,
+  has_many :followee_followings,
     class_name: "Following",
     foreign_key: :followee_id
   has_many :users_following,
-    through: :followee_fallowings,
+    through: :followee_followings,
     class_name: "User",
     source: :follower
 
-  has_many :follower_fallowings,
+  has_many :follower_followings,
     class_name: "Following",
     foreign_key: :follower_id
 
   has_many :users_followed,
-    through: :follower_fallowings,
+    through: :follower_followings,
     class_name: "User",
     source: :followee 
 
@@ -98,6 +98,10 @@ class User < ApplicationRecord
     update(notification_email_prefs: Hash[attrs])
   end
 
+
+  def mutuals
+    User.where(id: users_following).where(id: users_followed)
+  end
 
   def followed_by? user
     users_following.include? user

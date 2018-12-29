@@ -1,0 +1,9 @@
+<%= render 'bio_section' %>
+<%= page_title "#{@user.name}'s Mutuals" %>
+
+<section class="section">
+  <div class="container">
+    <%= render "tabs" %>
+    <%= render @user.mutuals %>
+  </div>
+</section>

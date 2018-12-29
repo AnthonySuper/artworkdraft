@@ -44,4 +44,19 @@ RSpec.describe User, type: :model do
       it { is_expected.to_not be_unfollowable_by(user) }
     end
   end
+
+  describe "mutuals" do
+    let(:user_a) { create(:user) }
+    let(:user_b) { create(:user) }
+    let(:user_c) { create(:user) }
+    before(:each) do
+      create(:following, followee: user_a, follower: user_b)
+      create(:following, followee: user_b, follower: user_a)
+      create(:following, followee: user_c, follower: user_b)
+    end
+
+    it "is proper" do
+      expect(user_b.mutuals).to contain_exactly(user_a)
+    end
+  end
 end

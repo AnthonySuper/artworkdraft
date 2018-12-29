@@ -49,6 +49,14 @@ class UserPolicy < ApplicationPolicy
     same_user?
   end
 
+  def followers?
+    true
+  end
+
+  def mutuals?
+    same_user?
+  end
+
   protected
 
   def same_user?
