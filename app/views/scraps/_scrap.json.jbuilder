@@ -5,4 +5,4 @@ json.extract! scrap,
   :created_at,
   :updated_at
 json.user scrap.user, partial: "users/user", as: :user
-json.image_url url_for(scrap.image.variant(resize: "2000x2000>"))
+json.image_url url_for(scrap.image.variant(resize: "750x750>"))
