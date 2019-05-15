@@ -1,7 +1,7 @@
 # ArtWorkDraft
 [![Build Status](https://travis-ci.org/AnthonySuper/artworkdraft.svg?branch=master)](https://travis-ci.org/AnthonySuper/artworkdraft)
 
-It's an art website!
+It's an art website! Not currently under development, sadly. 
 
 
 ## Contributing
